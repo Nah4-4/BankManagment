@@ -22,5 +22,32 @@ namespace BankManagmentSystem
         {
            
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            user_info info = new user_info();
+            info.Show();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
