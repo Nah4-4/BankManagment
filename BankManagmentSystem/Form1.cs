@@ -24,35 +24,30 @@ namespace BankManagmentSystem
         {
            
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Close(object sender, EventArgs e)
         {
-            Instance.Hide();
+            user_info.Instance.Close();
+            create_account.Instance.Close();
+        }
+
+        private void Blogin_Click(object sender, EventArgs e)
+        {
+            this.Hide();
             user_info.Instance.Show();
             
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void TBname_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void TBpassword_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LLcreateaccount_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Instance.Hide();
             create_account.Instance.Show();
