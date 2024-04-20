@@ -1,6 +1,6 @@
 ﻿namespace BankManagmentSystem
 {
-    partial class user_info
+    partial class create_account
     {
         /// <summary>
         /// Required designer variable.
@@ -33,23 +33,23 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(334, 430);
+            this.button1.Location = new System.Drawing.Point(314, 443);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 23);
+            this.button1.Size = new System.Drawing.Size(156, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // user_info
+            // create_account
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 564);
+            this.ClientSize = new System.Drawing.Size(800, 556);
             this.Controls.Add(this.button1);
-            this.Name = "user_info";
-            this.Text = "user_info";
-            this.Load += new System.EventHandler(this.user_info_Load);
+            this.Name = "create_account";
+            this.Text = "create_account";
+            this.Load += new System.EventHandler(this.create_account_Load);
             this.ResumeLayout(false);
 
         }

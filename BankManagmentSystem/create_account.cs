@@ -10,21 +10,26 @@ using System.Windows.Forms;
 
 namespace BankManagmentSystem
 {
-    public partial class user_info : Form
+    public partial class create_account : Form
     {
-        public static user_info Instance = new user_info() ;
-        public user_info()
+        public static create_account Instance = new create_account();
+        public create_account()
         {
             InitializeComponent();
             Instance = this;
         }
 
-        private void user_info_Load(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Show();
+        }
+
+        private void create_account_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
             Form1.Instance.Show();
             Instance.Hide();
