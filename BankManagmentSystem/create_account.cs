@@ -18,12 +18,6 @@ namespace BankManagmentSystem
             InitializeComponent();
             Instance = this;
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Show();
-        }
-
         private void create_account_Load(object sender, EventArgs e)
         {
 
