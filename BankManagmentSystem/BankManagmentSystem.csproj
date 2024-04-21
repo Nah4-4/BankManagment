@@ -109,6 +109,7 @@
     <Compile Include="user_info.Designer.cs">
       <DependentUpon>user_info.cs</DependentUpon>
     </Compile>
+    <None Include="Resources\world-map-illustration-isolated-on-grey-background-flat-earth-globe-or-world-map-free-vector.jpg" />
     <EmbeddedResource Include="create_account.resx">
       <DependentUpon>create_account.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -159,6 +160,15 @@
     <EmbeddedResource Include="Resources\Roboto-BlackItalic.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Include="Resources\banking-and-finance-concept-digital-connect-system-financial-and-banking-technology-with-integrated-circles-glowing-line-icons-and-on-blue-background-ddffesign-vector.jpg" />
+    <None Include="Resources\hand-drawn-flat-design-stock-market-concept_23-2149166595.png" />
+    <None Include="Resources\czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgxLTAwMDktcC1sMWxnZ2hpcS5wbmc.png" />
+    <None Include="Resources\d17080dd1da89e40520bbda63039daaf.jpg" />
+    <None Include="Resources\images %282%29.jpg" />
+    <Content Include="Resources\images %282%29.png" />
+    <None Include="Resources\images %282%291.png" />
+    <None Include="Resources\images.jpg" />
+    <None Include="Resources\pngtree-abstract-white-and-grey-curved-layers-background-picture-image_1881551.jpg" />
     <Content Include="Resources\Roboto-Bold.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

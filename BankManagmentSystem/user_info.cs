@@ -24,14 +24,8 @@ namespace BankManagmentSystem
         {
             Lname.Text = "Nahom Kiflu";
             Ldisplayaccount.Text = "10002";
+            Ldate.Text = DateTime.Today.ToString("ddd MMM dd,yyy");
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Form1.Instance.Show();
-            Instance.Hide();
-        }
-
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -57,9 +51,28 @@ namespace BankManagmentSystem
                 Ldispalybalance.Text = "*****";
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        private void Btransfer_Click(object sender, EventArgs e)
+        {
+            Ptransfer.Visible = true;
+            Blogout.BringToFront();
+        }
+
+        private void Blogout_Click(object sender, EventArgs e)
+        {
+            Form1.Instance.Show();
+            Instance.Close();
+            Instance = new user_info();
+            Ptransfer.Visible = false;
+        }
+
+        private void TBaccountNum_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void TBaccountNum_Click(object sender, EventArgs e)
+        {
+            label5.Visible = false;
         }
     }
  
