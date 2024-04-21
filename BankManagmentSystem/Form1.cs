@@ -14,6 +14,7 @@ namespace BankManagmentSystem
     public partial class Form1 : Form
     {
         public static Form1 Instance;
+        public static string username="BM-06";
         public Form1()
         {
             InitializeComponent();
