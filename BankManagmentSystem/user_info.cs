@@ -15,7 +15,11 @@ namespace BankManagmentSystem
 {
     public partial class user_info : Form
     {
+        
+        string name, balance, accnum;
         string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/XEPDB1;";
+        string accQuary = "select * from ACCOUNT WHERE USER_NAME = :user_name";
+        string custQuary = "select * from CUSTOMER WHERE USER_NAME = :user_name";
         bool balanceVisible;
         public static user_info Instance = new user_info();
         public user_info()
@@ -26,8 +30,46 @@ namespace BankManagmentSystem
 
         private void user_info_Load(object sender, EventArgs e)
         {
-            Lname.Text = "Nahom Kiflu";
-            Ldisplayaccount.Text = "10002";
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    using (OracleCommand accCommand = new OracleCommand(accQuary, connection))
+                    {
+                        using (OracleCommand custCommand = new OracleCommand(custQuary, connection))
+                        {
+
+
+                            accCommand.Parameters.Add(":username", OracleDbType.Varchar2).Value = Form1.username;
+                            custCommand.Parameters.Add(":username", OracleDbType.Varchar2).Value = Form1.username;
+                            using (OracleDataReader accountReader = accCommand.ExecuteReader())
+                            using (OracleDataReader customerReader = custCommand.ExecuteReader())
+                            {
+                                if (accountReader.Read()) // Check if there is data available
+                                {
+                                    accnum = accountReader.GetString(accountReader.GetOrdinal("ACCOUNT_NUMBER"));
+                                    balance = accountReader.GetString(accountReader.GetOrdinal("BALANCE"));
+                                }
+
+                                if (customerReader.Read()) // Check if there is data available
+                                {
+                                    name = customerReader.GetString(customerReader.GetOrdinal("FIRST_NAME")) + " " + customerReader.GetString(customerReader.GetOrdinal("LAST_NAME"));
+                                }
+
+                            }
+                        }
+                    }
+                }
+                catch (OracleException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            Lname.Text = name;
+            Ldisplayaccount.Text = accnum;
+            Ltransferfrom.Text = accnum;
+            available.Text = balance;
             Ldate.Text = DateTime.Today.ToString("ddd MMM dd,yyy");
         }
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -50,7 +92,7 @@ namespace BankManagmentSystem
         {
             balanceVisible = !balanceVisible;
             if(balanceVisible)
-                Ldispalybalance.Text = "1234";
+                Ldispalybalance.Text = balance;
             else
                 Ldispalybalance.Text = "*****";
         }
@@ -103,6 +145,31 @@ namespace BankManagmentSystem
                     MessageBox.Show(ex.Message);
                 }
             }
+        }
+
+        private void Ltransferfrom_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Ptransfer_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void available_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DGtransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Phome_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     } 
 }

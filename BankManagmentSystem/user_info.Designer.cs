@@ -28,14 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
-            this.Blogout = new System.Windows.Forms.Button();
             this.Phome = new System.Windows.Forms.Panel();
+            this.Blogout = new System.Windows.Forms.Button();
             this.Ptransfer = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
+            this.available = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.BConfirmTransfer = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -98,18 +96,6 @@
             this.tabHome.Text = "Home";
             this.tabHome.UseVisualStyleBackColor = true;
             // 
-            // Blogout
-            // 
-            this.Blogout.BackgroundImage = global::BankManagmentSystem.Properties.Resources.images__2_;
-            this.Blogout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Blogout.Location = new System.Drawing.Point(666, 2);
-            this.Blogout.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Blogout.Name = "Blogout";
-            this.Blogout.Size = new System.Drawing.Size(51, 52);
-            this.Blogout.TabIndex = 0;
-            this.Blogout.UseVisualStyleBackColor = true;
-            this.Blogout.Click += new System.EventHandler(this.Blogout_Click);
-            // 
             // Phome
             // 
             this.Phome.BackColor = System.Drawing.Color.Silver;
@@ -127,11 +113,24 @@
             this.Phome.Name = "Phome";
             this.Phome.Size = new System.Drawing.Size(726, 813);
             this.Phome.TabIndex = 7;
+            this.Phome.Paint += new System.Windows.Forms.PaintEventHandler(this.Phome_Paint);
+            // 
+            // Blogout
+            // 
+            this.Blogout.BackgroundImage = global::BankManagmentSystem.Properties.Resources.images__2_;
+            this.Blogout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Blogout.Location = new System.Drawing.Point(666, 2);
+            this.Blogout.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Blogout.Name = "Blogout";
+            this.Blogout.Size = new System.Drawing.Size(51, 52);
+            this.Blogout.TabIndex = 0;
+            this.Blogout.UseVisualStyleBackColor = true;
+            this.Blogout.Click += new System.EventHandler(this.Blogout_Click);
             // 
             // Ptransfer
             // 
             this.Ptransfer.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Ptransfer.Controls.Add(this.label6);
+            this.Ptransfer.Controls.Add(this.available);
             this.Ptransfer.Controls.Add(this.label5);
             this.Ptransfer.Controls.Add(this.BConfirmTransfer);
             this.Ptransfer.Controls.Add(this.label4);
@@ -142,23 +141,26 @@
             this.Ptransfer.Controls.Add(this.Lamount);
             this.Ptransfer.Controls.Add(this.Ltransferfrom);
             this.Ptransfer.Controls.Add(this.Ltfrom);
-            this.Ptransfer.Location = new System.Drawing.Point(682, 668);
+            this.Ptransfer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Ptransfer.Location = new System.Drawing.Point(0, 0);
             this.Ptransfer.Margin = new System.Windows.Forms.Padding(4);
             this.Ptransfer.Name = "Ptransfer";
-            this.Ptransfer.Size = new System.Drawing.Size(704, 726);
+            this.Ptransfer.Size = new System.Drawing.Size(726, 813);
             this.Ptransfer.TabIndex = 6;
             this.Ptransfer.Visible = false;
+            this.Ptransfer.Paint += new System.Windows.Forms.PaintEventHandler(this.Ptransfer_Paint);
             // 
-            // label6
+            // available
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(263, 193);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 20);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "112,345";
+            this.available.AutoSize = true;
+            this.available.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.available.Location = new System.Drawing.Point(263, 193);
+            this.available.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.available.Name = "available";
+            this.available.Size = new System.Drawing.Size(67, 20);
+            this.available.TabIndex = 10;
+            this.available.Text = "112,345";
+            this.available.Click += new System.EventHandler(this.available_Click);
             // 
             // label5
             // 
@@ -261,6 +263,7 @@
             this.Ltransferfrom.Size = new System.Drawing.Size(91, 33);
             this.Ltransferfrom.TabIndex = 1;
             this.Ltransferfrom.Text = "10001";
+            this.Ltransferfrom.Click += new System.EventHandler(this.Ltransferfrom_Click);
             // 
             // Ltfrom
             // 
@@ -469,23 +472,7 @@
             this.DGtransactions.AllowUserToAddRows = false;
             this.DGtransactions.AllowUserToDeleteRows = false;
             this.DGtransactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGtransactions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DGtransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGtransactions.DefaultCellStyle = dataGridViewCellStyle2;
             this.DGtransactions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DGtransactions.Location = new System.Drawing.Point(0, 0);
             this.DGtransactions.Name = "DGtransactions";
@@ -494,6 +481,7 @@
             this.DGtransactions.RowTemplate.Height = 24;
             this.DGtransactions.Size = new System.Drawing.Size(689, 639);
             this.DGtransactions.TabIndex = 0;
+            this.DGtransactions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGtransactions_CellContentClick);
             // 
             // label7
             // 
@@ -510,7 +498,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(704, 726);
+            this.tabPage1.Size = new System.Drawing.Size(726, 813);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Profile";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -573,7 +561,7 @@
         private System.Windows.Forms.Button BConfirmTransfer;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label Ldate;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label available;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView DGtransactions;

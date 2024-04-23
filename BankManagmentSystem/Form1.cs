@@ -14,7 +14,7 @@ namespace BankManagmentSystem
     public partial class Form1 : Form
     {
         public static Form1 Instance;
-        public static string username="BM-06";
+        public static string username="";
         public Form1()
         {
             InitializeComponent();
@@ -33,9 +33,45 @@ namespace BankManagmentSystem
 
         private void Blogin_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            user_info.Instance.Show();
-            
+            string user = TBname.Text;
+            string pass = create_account.HashPassword(TBpassword.Text);
+            string query = "SELECT COUNT(*) FROM SECURITY WHERE USER_NAME = :user_name AND PASSWORD = :pass";
+
+            using (OracleConnection connection = new OracleConnection(create_account.connectionString))
+            {
+                using (OracleCommand command = new OracleCommand(query, connection))
+                {
+                    
+                    command.Parameters.Add(":user_name", OracleDbType.Varchar2).Value = user;
+                    command.Parameters.Add(":password", OracleDbType.Varchar2).Value = pass;
+
+                    try
+                    {
+                        connection.Open();
+
+                        
+                        int count = Convert.ToInt32(command.ExecuteScalar());
+
+                        if (count > 0)
+                        {
+                            username = TBname.Text;
+                            TBname.Text = "";
+                            TBpassword.Text = "";
+                            this.Hide();
+                            user_info.Instance.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error : \n \t Wrong Password or User Name");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                        MessageBox.Show("Error : \n \t An Error Occured please try again");
+                    }
+                }
+            }          
         }
 
         private void TBname_TextChanged(object sender, EventArgs e)
