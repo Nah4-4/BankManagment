@@ -67,7 +67,7 @@ namespace BankManagmentSystem
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.ToString());
+                        Console.WriteLine(ex.Message);
                         MessageBox.Show("Error : \n \t An Error Occured please try again");
                     }
                 }

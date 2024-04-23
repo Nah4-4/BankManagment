@@ -90,7 +90,7 @@ namespace BankManagmentSystem
                             command.Parameters.Add("p_last_name", OracleDbType.Varchar2).Value = Lname_field.Text;
                             command.Parameters.Add("p_phone_number", OracleDbType.Varchar2).Value = Pnum_field.Text;
                             command.Parameters.Add("p_address", OracleDbType.Varchar2).Value = Add_field.Text;
-                            command.Parameters.Add("p_password", OracleDbType.Varchar2).Value = password_field.Text;
+                            command.Parameters.Add("p_password", OracleDbType.Varchar2).Value = HashPassword(password_field.Text);
                             command.Parameters.Add("p_balance", OracleDbType.Decimal).Value = 50;
 
                             // Execute the stored procedure
