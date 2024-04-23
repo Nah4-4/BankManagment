@@ -101,7 +101,6 @@ namespace BankManagmentSystem
         private void Btransfer_Click(object sender, EventArgs e)
         {
             Ptransfer.Visible = true;
-            Blogout.BringToFront();
         }
 
         private void Blogout_Click(object sender, EventArgs e)
@@ -112,14 +111,9 @@ namespace BankManagmentSystem
             Ptransfer.Visible = false;
         }
 
-        private void TBaccountNum_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void TBaccountNum_Click(object sender, EventArgs e)
         {
-            TBaccountNum.Text = "";
+            label5.Visible = false;
         }
         private void tabTransaction_Enter(object sender, EventArgs e)
         {
@@ -148,15 +142,6 @@ namespace BankManagmentSystem
             }
         }
 
-        private void Ltransferfrom_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Ptransfer_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void available_Click(object sender, EventArgs e)
         {
@@ -203,9 +188,9 @@ namespace BankManagmentSystem
                             {
                                 int count = Convert.ToInt32(command.ExecuteScalar());
 
-                                if (count > 0)
+                                if (count > 0 && TBaccountNum.Text!=accnum)
                                 {
-                                    //do transaction here
+                                    Ptransfer.Visible = false;
                                 }
                                 else
                                 {
@@ -220,11 +205,6 @@ namespace BankManagmentSystem
                     }
                 }
             }
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void DGtransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)

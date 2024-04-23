@@ -63,6 +63,36 @@ namespace BankManagmentSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _11852428_4860404 {
+            get {
+                object obj = ResourceManager.GetObject("11852428_4860404", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _15273828_5568579 {
+            get {
+                object obj = ResourceManager.GetObject("15273828_5568579", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _15273828_55685791 {
+            get {
+                object obj = ResourceManager.GetObject("15273828_55685791", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _6803345 {
             get {
                 object obj = ResourceManager.GetObject("6803345", resourceCulture);
@@ -76,6 +106,16 @@ namespace BankManagmentSystem.Properties {
         internal static System.Drawing.Bitmap _777494_200 {
             get {
                 object obj = ResourceManager.GetObject("777494-200", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AdobeStock_291217289_copy {
+            get {
+                object obj = ResourceManager.GetObject("AdobeStock_291217289-copy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
