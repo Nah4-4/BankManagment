@@ -16,7 +16,7 @@ namespace BankManagmentSystem
     {
         public static create_account Instance = new create_account();
         
-        string connectionString = $"User Id="+ Environment.GetEnvironmentVariable("USER_NAME")+";Password="+ Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/XEPDB1;";
+        public static string connectionString = $"User Id="+ Environment.GetEnvironmentVariable("USER_NAME")+";Password="+ Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/XEPDB1;";
         const string  storedProcedureName = "CreateCustomer";
         public create_account()
         {
@@ -149,13 +149,13 @@ namespace BankManagmentSystem
                 return builder.ToString();
             }
         }
-        public static bool VerifyPassword(string enteredPassword, string storedHash)//checking if the password entered is same as the hashed password
-        {
-            // Hash the entered password
-            string hashedPassword = HashPassword(enteredPassword);
+        //public static bool VerifyPassword(string enteredPassword, string storedHash)//checking if the password entered is same as the hashed password
+        //{
+        //    // Hash the entered password
+        //    string hashedPassword = HashPassword(enteredPassword);
 
-            // Compare the hashed password with the stored hash
-            return hashedPassword == storedHash;
-        }
+        //    // Compare the hashed password with the stored hash
+        //    return hashedPassword == storedHash;
+        //}
     }
 }
