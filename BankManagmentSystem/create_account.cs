@@ -110,7 +110,7 @@ namespace BankManagmentSystem
 
                                     // Show message box with the last user_name and password
                                     // Show message box with the last user_name and password
-                                    MessageBox.Show($"Account Created successfully\n\u2713 Last User Name: {lastUserName}\n\tYour password is: {password_field.Text}");
+                                    MessageBox.Show($"      Account Created successfully\n\tUser Name: {lastUserName}\n\tYour password is: {password_field.Text}");
 
                                 }
                             }

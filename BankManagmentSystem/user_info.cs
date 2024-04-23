@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Oracle.ManagedDataAccess.Client;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -118,7 +119,7 @@ namespace BankManagmentSystem
 
         private void TBaccountNum_Click(object sender, EventArgs e)
         {
-            label5.Visible = false;
+            TBaccountNum.Text = "";
         }
         private void tabTransaction_Enter(object sender, EventArgs e)
         {
@@ -160,6 +161,65 @@ namespace BankManagmentSystem
         private void available_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void TBamount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!char.IsDigit(ch) && ch != 8 && ch != 46 && ch != '.')//8 is backspace and 46 is delete
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TBaccountNum_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!char.IsDigit(ch) && ch != 8 && ch != 46 )//8 is backspace and 46 is delete
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void BConfirmTransfer_Click(object sender, EventArgs e)
+        {
+            if (int.Parse(balance) < int.Parse(TBamount.Text))
+            {
+                MessageBox.Show("INSUFFICIENT BALANCE!!");
+            }
+            else
+            {
+                using (OracleConnection connection = new OracleConnection(connectionString))
+                {
+                    string sqlQuery = "SELECT COUNT(*) FROM ACCOUNT WHERE ACCOUNT_NUMBER = :accnum";
+                    
+                    try
+                    {
+                        connection.Open();
+                        using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                        {
+                            command.Parameters.Add(":accnum", OracleDbType.Varchar2).Value = TBaccountNum.Text;
+                            using (OracleDataReader reader = command.ExecuteReader())
+                            {
+                                int count = Convert.ToInt32(command.ExecuteScalar());
+
+                                if (count > 0)
+                                {
+                                    //do transaction here
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Account number doesn't exist");
+                                }
+                            }
+                        }
+                    }
+                    catch (OracleException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
         }
 
         private void DGtransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)

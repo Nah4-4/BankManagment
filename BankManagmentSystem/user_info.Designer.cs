@@ -34,7 +34,6 @@
             this.Blogout = new System.Windows.Forms.Button();
             this.Ptransfer = new System.Windows.Forms.Panel();
             this.available = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.BConfirmTransfer = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -131,7 +130,6 @@
             // 
             this.Ptransfer.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.Ptransfer.Controls.Add(this.available);
-            this.Ptransfer.Controls.Add(this.label5);
             this.Ptransfer.Controls.Add(this.BConfirmTransfer);
             this.Ptransfer.Controls.Add(this.label4);
             this.Ptransfer.Controls.Add(this.label3);
@@ -162,20 +160,6 @@
             this.available.Text = "112,345";
             this.available.Click += new System.EventHandler(this.available_Click);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.White;
-            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label5.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label5.Location = new System.Drawing.Point(99, 363);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(180, 23);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Account Number";
-            // 
             // BConfirmTransfer
             // 
             this.BConfirmTransfer.BackColor = System.Drawing.Color.White;
@@ -186,6 +170,7 @@
             this.BConfirmTransfer.TabIndex = 8;
             this.BConfirmTransfer.Text = "Confirm";
             this.BConfirmTransfer.UseVisualStyleBackColor = false;
+            this.BConfirmTransfer.Click += new System.EventHandler(this.BConfirmTransfer_Click);
             // 
             // label4
             // 
@@ -217,18 +202,22 @@
             this.TBamount.Name = "TBamount";
             this.TBamount.Size = new System.Drawing.Size(255, 30);
             this.TBamount.TabIndex = 5;
+            this.TBamount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TBamount_KeyPress);
             // 
             // TBaccountNum
             // 
             this.TBaccountNum.BackColor = System.Drawing.Color.White;
             this.TBaccountNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TBaccountNum.ForeColor = System.Drawing.Color.DarkGray;
             this.TBaccountNum.Location = new System.Drawing.Point(97, 359);
             this.TBaccountNum.Margin = new System.Windows.Forms.Padding(4);
             this.TBaccountNum.Name = "TBaccountNum";
             this.TBaccountNum.Size = new System.Drawing.Size(255, 30);
             this.TBaccountNum.TabIndex = 4;
+            this.TBaccountNum.Text = "Account Number";
             this.TBaccountNum.Click += new System.EventHandler(this.TBaccountNum_Click);
             this.TBaccountNum.TextChanged += new System.EventHandler(this.TBaccountNum_TextChanged);
+            this.TBaccountNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TBaccountNum_KeyPress);
             // 
             // label2
             // 
@@ -559,7 +548,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TBamount;
         private System.Windows.Forms.Button BConfirmTransfer;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label Ldate;
         private System.Windows.Forms.Label available;
         private System.Windows.Forms.Label label7;
