@@ -16,7 +16,7 @@ namespace BankManagmentSystem
 {
     public partial class user_info : Form
     {
-        
+        const string storedProcedureName = "PROCESSTRANSACTION";
         string name, balance, accnum;
         string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/XEPDB1;";
         string accQuary = "select * from ACCOUNT WHERE USER_NAME = :user_name";
@@ -168,7 +168,7 @@ namespace BankManagmentSystem
 
         private void BConfirmTransfer_Click(object sender, EventArgs e)
         {
-            if (int.Parse(balance) < int.Parse(TBamount.Text))
+            if ( TBamount.Text == "" || int.Parse(balance) < int.Parse(TBamount.Text)  )
             {
                 MessageBox.Show("INSUFFICIENT BALANCE!!");
             }
@@ -190,6 +190,36 @@ namespace BankManagmentSystem
 
                                 if (count > 0 && TBaccountNum.Text!=accnum)
                                 {
+                                    using (OracleConnection conne = new OracleConnection(connectionString))
+                                    {
+                                        try
+                                        {
+                                            conne.Open();
+                                            using (OracleCommand comm = new OracleCommand(storedProcedureName, conne))
+                                            {
+                                                // Specify that the command is a stored procedure
+                                                comm.CommandType = System.Data.CommandType.StoredProcedure;
+
+                                                // Add parameters to the stored procedure
+                                                comm.Parameters.Add("p_account_number_from", OracleDbType.Varchar2).Value = accnum;
+                                                comm.Parameters.Add("p_account_number_to", OracleDbType.Varchar2).Value = TBaccountNum.Text;
+                                                comm.Parameters.Add("p_amount", OracleDbType.Varchar2).Value = TBamount.Text;
+                                                balance = int.Parse(balance) - int.Parse(TBamount.Text) + "";
+                                                MessageBox.Show("Transaction successful!!");
+
+                                                // Execute the stored procedure
+                                                comm.ExecuteNonQuery();
+                                            }
+
+                                            // Close the connection
+                                            conne.Close();
+                                            connection.Close();
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            MessageBox.Show(ex.Message);
+                                        }
+                                    }
                                     Ptransfer.Visible = false;
                                 }
                                 else
@@ -205,6 +235,21 @@ namespace BankManagmentSystem
                     }
                 }
             }
+        }
+
+        private void Ptransfer_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void TBaccountNum_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBamount_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void DGtransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)

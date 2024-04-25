@@ -149,6 +149,11 @@ namespace BankManagmentSystem
                 return builder.ToString();
             }
         }
+
+        private void password_field_TextChanged(object sender, EventArgs e)
+        {
+
+        }
         //public static bool VerifyPassword(string enteredPassword, string storedHash)//checking if the password entered is same as the hashed password
         //{
         //    // Hash the entered password
