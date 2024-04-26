@@ -93,9 +93,29 @@ namespace BankManagmentSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _552698_200 {
+            get {
+                object obj = ResourceManager.GetObject("552698-200", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _6803345 {
             get {
                 object obj = ResourceManager.GetObject("6803345", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _699204_200 {
+            get {
+                object obj = ResourceManager.GetObject("699204-200", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +143,29 @@ namespace BankManagmentSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap computer_icons_download_back_icon {
+            get {
+                object obj = ResourceManager.GetObject("computer-icons-download-back-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap dollar_exchange_money_transfer_icon_21 {
             get {
                 object obj = ResourceManager.GetObject("dollar-exchange-money-transfer-icon-21", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap dollar_exchange_money_transfer_icon_211 {
+            get {
+                object obj = ResourceManager.GetObject("dollar-exchange-money-transfer-icon-211", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -267,6 +307,17 @@ namespace BankManagmentSystem.Properties {
             get {
                 object obj = ResourceManager.GetObject("Roboto_ThinItalic", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap smart_house_vector_icon_homeillustration_sign_utilities_symbol_smart_house_vector_icon_home_illustration_sign_utilities_symbol_192795875 {
+            get {
+                object obj = ResourceManager.GetObject("smart-house-vector-icon-homeillustration-sign-utilities-symbol-smart-house-vector" +
+                        "-icon-home-illustration-sign-utilities-symbol-192795875", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

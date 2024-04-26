@@ -74,6 +74,8 @@ namespace BankManagmentSystem
 
             else
             {
+                string Fname= char.ToUpper(Fname_field.Text[0]) + Fname_field.Text.Substring(1);
+                string Lname= char.ToUpper(Lname_field.Text[0]) + Lname_field.Text.Substring(1);
                 using (OracleConnection connection = new OracleConnection(connectionString))
                 {
                     try
@@ -86,8 +88,8 @@ namespace BankManagmentSystem
                             command.CommandType = System.Data.CommandType.StoredProcedure;
 
                             // Add parameters to the stored procedure
-                            command.Parameters.Add("p_first_name", OracleDbType.Varchar2).Value = Fname_field.Text;
-                            command.Parameters.Add("p_last_name", OracleDbType.Varchar2).Value = Lname_field.Text;
+                            command.Parameters.Add("p_first_name", OracleDbType.Varchar2).Value = Fname;
+                            command.Parameters.Add("p_last_name", OracleDbType.Varchar2).Value = Lname;
                             command.Parameters.Add("p_phone_number", OracleDbType.Varchar2).Value = Pnum_field.Text;
                             command.Parameters.Add("p_address", OracleDbType.Varchar2).Value = Add_field.Text;
                             command.Parameters.Add("p_password", OracleDbType.Varchar2).Value = HashPassword(password_field.Text);

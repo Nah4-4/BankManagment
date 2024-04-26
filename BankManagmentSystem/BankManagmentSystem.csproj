@@ -54,6 +54,7 @@
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -109,6 +110,9 @@
     <Compile Include="user_info.Designer.cs">
       <DependentUpon>user_info.cs</DependentUpon>
     </Compile>
+    <None Include="Resources\smart-house-vector-icon-homeillustration-sign-utilities-symbol-smart-house-vector-icon-home-illustration-sign-utilities-symbol-192795875.png" />
+    <None Include="Resources\smart-house-vector-icon-home-illustration-sign-utilities-symbol-smart-house-vector-icon-home-illustration-sign-utilities-symbol-192795875.png" />
+    <None Include="Resources\smart-house-vector-icon-home-illustration-sign-utilities-symbol-can-be-used-web-sites-mobile-applications-smart-house-192795886.jpg" />
     <None Include="Resources\world-map-illustration-isolated-on-grey-background-flat-earth-globe-or-world-map-free-vector.jpg" />
     <EmbeddedResource Include="create_account.resx">
       <DependentUpon>create_account.cs</DependentUpon>
@@ -169,10 +173,16 @@
     <None Include="Resources\15273828_5568579.jpg" />
     <None Include="Resources\AdobeStock_291217289-copy.jpg" />
     <None Include="Resources\15273828_55685791.jpg" />
+    <None Include="Resources\computer-icons-download-back-icon.jpg" />
+    <None Include="Resources\699204-200.png" />
+    <None Include="Resources\3593515-200.png" />
+    <None Include="Resources\552698-200.png" />
+    <None Include="Resources\dollar-exchange-money-transfer-icon-211.png" />
     <Content Include="Resources\images %282%29.png" />
     <None Include="Resources\images %282%291.png" />
     <None Include="Resources\images.jpg" />
     <None Include="Resources\pngtree-abstract-white-and-grey-curved-layers-background-picture-image_1881551.jpg" />
+    <None Include="Resources\pngtree-health-and-utility-icons-image_1145277.jpg" />
     <Content Include="Resources\Roboto-Bold.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -23,7 +23,7 @@ namespace BankManagmentSystem
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+
         }
         private void Form1_Close(object sender, EventArgs e)
         {
@@ -62,13 +62,13 @@ namespace BankManagmentSystem
                         }
                         else
                         {
-                            MessageBox.Show("Error : \n \t Wrong Password or User Name");
+                            MessageBox.Show("Error :\n          Wrong Password or User Name");
                         }
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
-                        MessageBox.Show("Error : \n \t An Error Occured please try again");
+                        MessageBox.Show("Error : \n            An Error Occured please try again");
                     }
                 }
             }          
@@ -88,6 +88,11 @@ namespace BankManagmentSystem
         {
             Instance.Hide();
             create_account.Instance.Show();
+        }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            TBname.Text = "BM-";
         }
     }
 }

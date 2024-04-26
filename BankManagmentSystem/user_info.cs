@@ -70,26 +70,10 @@ namespace BankManagmentSystem
             available.Text = balance;
             Ldate.Text = DateTime.Today.ToString("ddd MMM dd,yyy");
         }
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-        private void username_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void Ldispalybalance_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void Ldisplayaccount_Click(object sender, EventArgs e)
-        {
-
-        }
         private void BseeBalance_Click(object sender, EventArgs e)
         {
             balanceVisible = !balanceVisible;
-            if(balanceVisible)
+            if (balanceVisible)
                 Ldispalybalance.Text = balance;
             else
                 Ldispalybalance.Text = "*****";
@@ -98,6 +82,11 @@ namespace BankManagmentSystem
         private void Btransfer_Click(object sender, EventArgs e)
         {
             Ptransfer.Visible = true;
+            Btransfer.TabStop = false;
+            BseeBalance.TabStop = false;
+            Blogout.TabStop = false;
+            TBamount.TabStop =true;
+            TBaccountNum.TabStop = true;
         }
 
         private void Blogout_Click(object sender, EventArgs e)
@@ -114,9 +103,9 @@ namespace BankManagmentSystem
         }
         private void tabTransaction_Enter(object sender, EventArgs e)
         {
-           using (OracleConnection connection = new OracleConnection(connectionString))
+            using (OracleConnection connection = new OracleConnection(connectionString))
             {
-                string sqlQuery = "SELECT * FROM TRANSACTION WHERE ACCOUNT_NUMBER = (SELECT ACCOUNT_NUMBER FROM Account WHERE USER_NAME = :userName)";
+                string sqlQuery = "SELECT amount,transferred_from,transferred_to,transaction_date FROM TRANSACTION WHERE transferred_to = (SELECT ACCOUNT_NUMBER FROM Account WHERE USER_NAME = :userName) OR TRANSFERRED_FROM = (SELECT ACCOUNT_NUMBER FROM Account WHERE USER_NAME = :userName) order by transaction_date desc";
                 string username = Form1.username;
                 try
                 {
@@ -126,9 +115,17 @@ namespace BankManagmentSystem
                         command.Parameters.Add(":username", OracleDbType.Varchar2).Value = username;
                         using (OracleDataReader reader = command.ExecuteReader())
                         {
-                            DataTable dt = new DataTable();
-                            dt.Load(reader);
-                            DGtransactions.DataSource = dt;
+                            DataTable dataTable = new DataTable();
+                            dataTable.Columns.Add("Transaction",typeof(string));
+                            dataTable.Load(reader);
+                            foreach (DataRow row in dataTable.Rows)
+                            {
+                                if (row["transferred_from"].ToString() == accnum)
+                                    row["Transaction"] = "Debited";
+                                else if (row["transferred_to"].ToString() == accnum)
+                                    row["Transaction"] = "Credited";
+                            }
+                            DGtransactions.DataSource = dataTable;
                         }
                     }
                 }
@@ -138,13 +135,6 @@ namespace BankManagmentSystem
                 }
             }
         }
-
-
-        private void available_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void TBamount_KeyPress(object sender, KeyPressEventArgs e)
         {
             char ch = e.KeyChar;
@@ -165,7 +155,7 @@ namespace BankManagmentSystem
 
         private void BConfirmTransfer_Click(object sender, EventArgs e)
         {
-            if ( TBamount.Text == "" || int.Parse(balance) < int.Parse(TBamount.Text)  )
+            if (TBamount.Text == "" || int.Parse(balance) < int.Parse(TBamount.Text))
             {
                 MessageBox.Show("INSUFFICIENT BALANCE!!");
             }
@@ -174,7 +164,7 @@ namespace BankManagmentSystem
                 using (OracleConnection connection = new OracleConnection(connectionString))
                 {
                     string sqlQuery = "SELECT COUNT(*) FROM ACCOUNT WHERE ACCOUNT_NUMBER = :accnum";
-                    
+
                     try
                     {
                         connection.Open();
@@ -192,6 +182,19 @@ namespace BankManagmentSystem
                                         try
                                         {
                                             conne.Open();
+                                            using (OracleCommand commands = new OracleCommand($"Select first_name,last_name from customer where user_name=(select user_name from account where account.account_number =:TBaccountNum)", connection))
+                                            {
+                                                commands.Parameters.Add(":TBaccountNum", OracleDbType.Varchar2).Value = TBaccountNum.Text;
+
+                                                using (OracleDataReader readers = commands.ExecuteReader())
+                                                {
+                                                    readers.Read();
+                                                    string fName = readers["first_name"].ToString();
+                                                    string lName = readers["last_name"].ToString();
+                                                    MessageBox.Show($"      Transaction successful!!\nETB {TBamount.Text} transferred to {fName+" "+lName}");
+                                                }
+                                            }
+
                                             using (OracleCommand comm = new OracleCommand(storedProcedureName, conne))
                                             {
                                                 // Specify that the command is a stored procedure
@@ -202,7 +205,6 @@ namespace BankManagmentSystem
                                                 comm.Parameters.Add("p_account_number_to", OracleDbType.Varchar2).Value = TBaccountNum.Text;
                                                 comm.Parameters.Add("p_amount", OracleDbType.Varchar2).Value = TBamount.Text;
                                                 balance = int.Parse(balance) - int.Parse(TBamount.Text) + "";
-                                                MessageBox.Show("Transaction successful!!");
 
                                                 // Execute the stored procedure
                                                 comm.ExecuteNonQuery();
@@ -218,6 +220,9 @@ namespace BankManagmentSystem
                                         }
                                     }
                                     Ptransfer.Visible = false;
+                                    BseeBalance.TabStop = true;
+                                    Btransfer.TabStop = true;
+                                    Blogout.TabStop = true;
                                 }
                                 else
                                 {
@@ -234,29 +239,27 @@ namespace BankManagmentSystem
             }
         }
 
-        private void Ptransfer_Paint(object sender, PaintEventArgs e)
+        private void Butility_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Coming Soon");
         }
 
-        private void TBaccountNum_TextChanged(object sender, EventArgs e)
+        private void Btopup_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Coming Soon");
         }
 
-        private void TBamount_TextChanged(object sender, EventArgs e)
+        private void TBaccountNum_Enter(object sender, EventArgs e)
         {
-
+            label5.Visible = false;
         }
 
-        private void DGtransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Bback_Click(object sender, EventArgs e)
         {
-
+            Ptransfer.Visible = false;
+            BseeBalance.TabStop = true;
+            Btransfer.TabStop = true;
+            Blogout.TabStop = true;
         }
-
-        private void Phome_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-    } 
+    }
 }
