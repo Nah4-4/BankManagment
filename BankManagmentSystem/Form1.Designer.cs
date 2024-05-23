@@ -42,10 +42,10 @@
             // Blogin
             // 
             this.Blogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Blogin.Location = new System.Drawing.Point(233, 216);
-            this.Blogin.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.Blogin.Location = new System.Drawing.Point(350, 332);
+            this.Blogin.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Blogin.Name = "Blogin";
-            this.Blogin.Size = new System.Drawing.Size(127, 35);
+            this.Blogin.Size = new System.Drawing.Size(190, 54);
             this.Blogin.TabIndex = 11;
             this.Blogin.Text = "Log In";
             this.Blogin.UseVisualStyleBackColor = true;
@@ -56,13 +56,13 @@
             this.TBname.BackColor = System.Drawing.Color.WhiteSmoke;
             this.TBname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TBname.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBname.Location = new System.Drawing.Point(188, 72);
-            this.TBname.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.TBname.Multiline = true;
+            this.TBname.Location = new System.Drawing.Point(282, 111);
+            this.TBname.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.TBname.Name = "TBname";
-            this.TBname.Size = new System.Drawing.Size(251, 25);
+            this.TBname.Size = new System.Drawing.Size(376, 30);
             this.TBname.TabIndex = 9;
             this.TBname.Text = "BM-";
+            this.TBname.WordWrap = false;
             this.TBname.TextChanged += new System.EventHandler(this.TBname_TextChanged);
             // 
             // TBpassword
@@ -70,13 +70,13 @@
             this.TBpassword.BackColor = System.Drawing.Color.WhiteSmoke;
             this.TBpassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TBpassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBpassword.Location = new System.Drawing.Point(188, 157);
-            this.TBpassword.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.TBpassword.Multiline = true;
+            this.TBpassword.Location = new System.Drawing.Point(282, 242);
+            this.TBpassword.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.TBpassword.Name = "TBpassword";
             this.TBpassword.PasswordChar = '*';
-            this.TBpassword.Size = new System.Drawing.Size(251, 25);
+            this.TBpassword.Size = new System.Drawing.Size(376, 33);
             this.TBpassword.TabIndex = 10;
+            this.TBpassword.WordWrap = false;
             this.TBpassword.TextChanged += new System.EventHandler(this.TBpassword_TextChanged);
             // 
             // Lname
@@ -84,10 +84,9 @@
             this.Lname.AutoSize = true;
             this.Lname.BackColor = System.Drawing.Color.Transparent;
             this.Lname.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lname.Location = new System.Drawing.Point(47, 77);
-            this.Lname.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Lname.Location = new System.Drawing.Point(70, 118);
             this.Lname.Name = "Lname";
-            this.Lname.Size = new System.Drawing.Size(97, 18);
+            this.Lname.Size = new System.Drawing.Size(143, 28);
             this.Lname.TabIndex = 11;
             this.Lname.Text = "User-Name";
             // 
@@ -96,10 +95,9 @@
             this.Lpassword.AutoSize = true;
             this.Lpassword.BackColor = System.Drawing.Color.Transparent;
             this.Lpassword.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lpassword.Location = new System.Drawing.Point(47, 162);
-            this.Lpassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Lpassword.Location = new System.Drawing.Point(70, 249);
             this.Lpassword.Name = "Lpassword";
-            this.Lpassword.Size = new System.Drawing.Size(87, 18);
+            this.Lpassword.Size = new System.Drawing.Size(128, 28);
             this.Lpassword.TabIndex = 12;
             this.Lpassword.Text = "Password";
             // 
@@ -108,10 +106,9 @@
             this.LLcreateaccount.AutoSize = true;
             this.LLcreateaccount.BackColor = System.Drawing.Color.Transparent;
             this.LLcreateaccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LLcreateaccount.Location = new System.Drawing.Point(251, 266);
-            this.LLcreateaccount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LLcreateaccount.Location = new System.Drawing.Point(376, 409);
             this.LLcreateaccount.Name = "LLcreateaccount";
-            this.LLcreateaccount.Size = new System.Drawing.Size(89, 15);
+            this.LLcreateaccount.Size = new System.Drawing.Size(134, 22);
             this.LLcreateaccount.TabIndex = 13;
             this.LLcreateaccount.TabStop = true;
             this.LLcreateaccount.Text = "Create Account";
@@ -129,31 +126,33 @@
             this.panel1.Controls.Add(this.LLcreateaccount);
             this.panel1.Controls.Add(this.TBpassword);
             this.panel1.Controls.Add(this.Blogin);
-            this.panel1.Location = new System.Drawing.Point(167, 166);
+            this.panel1.Location = new System.Drawing.Point(250, 255);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(567, 325);
+            this.panel1.Size = new System.Drawing.Size(850, 499);
             this.panel1.TabIndex = 14;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Palatino Linotype", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(320, 61);
+            this.label1.Location = new System.Drawing.Point(480, 94);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(259, 50);
+            this.label1.Size = new System.Drawing.Size(390, 75);
             this.label1.TabIndex = 15;
             this.label1.Text = "BANK NAME";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BankManagmentSystem.Properties.Resources.AdobeStock_291217289_copy;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(890, 610);
+            this.ClientSize = new System.Drawing.Size(1335, 938);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

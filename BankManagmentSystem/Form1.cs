@@ -29,6 +29,7 @@ namespace BankManagmentSystem
         {
             user_info.Instance.Close();
             create_account.Instance.Close();
+            admin_page.Instance.Close();
         }
 
         private void Blogin_Click(object sender, EventArgs e)
