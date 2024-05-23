@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace BankManagmentSystem
 {
@@ -17,6 +16,8 @@ namespace BankManagmentSystem
     {
         string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xepdb1;";
         public static admin_page Instance = new admin_page();
+        int index;
+        string acc;
         public admin_page()
         {
             InitializeComponent();
@@ -30,6 +31,56 @@ namespace BankManagmentSystem
 
         private void button3_Click(object sender, EventArgs e)
         {
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    if (freeze_btn.Text == "FREEZE")
+                    {
+                        string sqlQuery = "UPDATE ACCOUNT SET freeze = 1 WHERE account_number = :account_number";
+
+                        using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                        {
+                            // Add parameter to the command
+                            command.Parameters.Add(new OracleParameter("account_number", acc));
+
+                            // Execute the command
+                            int rowsUpdated = command.ExecuteNonQuery();
+
+                            if (rowsUpdated > 0)
+                            {
+                                MessageBox.Show("Account frozen successfully.", "Update Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+
+                        }
+                    }
+                    else if(freeze_btn.Text == "UNFREEZE")
+                    {
+                        string sqlQuery = "UPDATE ACCOUNT SET freeze = 0 WHERE account_number = :account_number";
+
+                        using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                        {
+                            // Add parameter to the command
+                            command.Parameters.Add(new OracleParameter("account_number", acc));
+
+                            // Execute the command
+                            int rowsUpdated = command.ExecuteNonQuery();
+
+                            if (rowsUpdated > 0)
+                            {
+                                MessageBox.Show("Account unfrozen successfully.", "Update Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+
+                        }
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("An error occurred: " + ex.Message);
+                }
+            }
 
         }
 
@@ -159,6 +210,49 @@ namespace BankManagmentSystem
                     row.Clear();
                 }
             }
+        }
+
+        private void display_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            index = e.RowIndex;
+            DataGridViewRow row = display.Rows[index];
+            acc = row.Cells[0].Value.ToString();
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    string sqlQuery = "SELECT FREEZE FROM ACCOUNT WHERE ACCOUNT_NUMBER = :accnum";
+                    OracleCommand command = new OracleCommand(sqlQuery, connection);
+                    command.Parameters.Add(new OracleParameter("accnum", acc));
+
+                    OracleDataReader reader = command.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        int freezeValue = Convert.ToInt32(reader["FREEZE"]);
+                        if (freezeValue == 1)
+                        {
+                            freeze_btn.Text = "UNFREEZE";
+                        }
+                        else
+                        {
+                            freeze_btn.Text = "FREEZE";
+                        }
+                    }
+ 
+
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                    
+                }
+            }
+
+
         }
     }
 }
