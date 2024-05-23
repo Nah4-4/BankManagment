@@ -15,7 +15,7 @@ namespace BankManagmentSystem
     {
         const string storedProcedureName = "PROCESSTRANSACTION";
         string name, balance, accnum;
-        string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/XEPDB1;";
+        string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xe;";
         string accQuary = "select * from ACCOUNT WHERE USER_NAME = :user_name";
         string custQuary = "select * from CUSTOMER WHERE USER_NAME = :user_name";
         bool balanceVisible;
@@ -247,6 +247,26 @@ namespace BankManagmentSystem
         private void Btopup_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Coming Soon");
+        }
+
+        private void Ltransferfrom_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Ldispalybalance_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DGtransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tabTransaction_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void TBaccountNum_Enter(object sender, EventArgs e)
