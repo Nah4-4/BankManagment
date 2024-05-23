@@ -76,6 +76,7 @@
             this.TBpassword.PasswordChar = '*';
             this.TBpassword.Size = new System.Drawing.Size(376, 33);
             this.TBpassword.TabIndex = 10;
+            this.TBpassword.Text = "admin";
             this.TBpassword.WordWrap = false;
             this.TBpassword.TextChanged += new System.EventHandler(this.TBpassword_TextChanged);
             // 
@@ -149,7 +150,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BankManagmentSystem.Properties.Resources.AdobeStock_291217289_copy;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1335, 938);
+            this.ClientSize = new System.Drawing.Size(1284, 823);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

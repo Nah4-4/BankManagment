@@ -37,7 +37,7 @@ namespace BankManagmentSystem
             string user = TBname.Text;
             string pass = create_account.HashPassword(TBpassword.Text);
             string query = "SELECT COUNT(*) FROM SECURITY WHERE USER_NAME = :user_name AND PASSWORD = :pass";
-            if (TBname.Text == "admin" && TBpassword.Text == "admin")
+            if (TBname.Text == "BM-" && TBpassword.Text == "admin")
             {
                 this.Hide();
                 admin_page.Instance.Show();
