@@ -16,7 +16,7 @@ namespace BankManagmentSystem
     {
         public static create_account Instance = new create_account();
         
-        public static string connectionString = $"User Id="+ Environment.GetEnvironmentVariable("USER_NAME")+";Password="+ Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/XEPDB1;";
+        public static string connectionString = $"User Id="+ Environment.GetEnvironmentVariable("USER_NAME")+";Password="+ Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xe;";
         const string  storedProcedureName = "CreateCustomer";
         public create_account()
         {

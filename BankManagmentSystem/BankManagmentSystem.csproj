@@ -85,6 +85,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin_page.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="admin_page.Designer.cs">
+      <DependentUpon>admin_page.cs</DependentUpon>
+    </Compile>
     <Compile Include="create_account.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     <None Include="Resources\smart-house-vector-icon-home-illustration-sign-utilities-symbol-smart-house-vector-icon-home-illustration-sign-utilities-symbol-192795875.png" />
     <None Include="Resources\smart-house-vector-icon-home-illustration-sign-utilities-symbol-can-be-used-web-sites-mobile-applications-smart-house-192795886.jpg" />
     <None Include="Resources\world-map-illustration-isolated-on-grey-background-flat-earth-globe-or-world-map-free-vector.jpg" />
+    <EmbeddedResource Include="admin_page.resx">
+      <DependentUpon>admin_page.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="create_account.resx">
       <DependentUpon>create_account.cs</DependentUpon>
       <SubType>Designer</SubType>

@@ -36,42 +36,50 @@ namespace BankManagmentSystem
             string user = TBname.Text;
             string pass = create_account.HashPassword(TBpassword.Text);
             string query = "SELECT COUNT(*) FROM SECURITY WHERE USER_NAME = :user_name AND PASSWORD = :pass";
-
-            using (OracleConnection connection = new OracleConnection(create_account.connectionString))
+            if (TBname.Text == "admin" && TBpassword.Text == "admin")
             {
-                using (OracleCommand command = new OracleCommand(query, connection))
+                this.Hide();
+                admin_page.Instance.Show();
+            }
+            else
+            {
+                using (OracleConnection connection = new OracleConnection(create_account.connectionString))
                 {
-                    
-                    command.Parameters.Add(":user_name", OracleDbType.Varchar2).Value = user;
-                    command.Parameters.Add(":password", OracleDbType.Varchar2).Value = pass;
-
-                    try
+                    using (OracleCommand command = new OracleCommand(query, connection))
                     {
-                        connection.Open();
 
-                        
-                        int count = Convert.ToInt32(command.ExecuteScalar());
+                        command.Parameters.Add(":user_name", OracleDbType.Varchar2).Value = user;
+                        command.Parameters.Add(":password", OracleDbType.Varchar2).Value = pass;
 
-                        if (count > 0)
+                        try
                         {
-                            username = TBname.Text;
-                            TBname.Text = "";
-                            TBpassword.Text = "";
-                            this.Hide();
-                            user_info.Instance.Show();
+                            connection.Open();
+
+
+                            int count = Convert.ToInt32(command.ExecuteScalar());
+
+                            if (count > 0)
+                            {
+                                username = TBname.Text;
+                                TBname.Text = "";
+                                TBpassword.Text = "";
+                                this.Hide();
+                                user_info.Instance.Show();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error :\n          Wrong Password or User Name");
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Error :\n              Wrong Password or User Name");
+                            Console.WriteLine(ex.Message);
+                            MessageBox.Show("Error : \n            An Error Occured please try again");
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        MessageBox.Show("Error :\n              An Error Occured please try again");
                     }
                 }
-            }          
+            }
+                      
         }
 
         private void TBname_TextChanged(object sender, EventArgs e)

@@ -80,10 +80,9 @@
             // 
             this.tabControl1.Controls.Add(this.tabHome);
             this.tabControl1.Controls.Add(this.tabTransaction);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(740, 782);
@@ -93,7 +92,7 @@
             // 
             this.tabHome.Controls.Add(this.Phome);
             this.tabHome.Location = new System.Drawing.Point(4, 31);
-            this.tabHome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabHome.Margin = new System.Windows.Forms.Padding(4);
             this.tabHome.Name = "tabHome";
             this.tabHome.Size = new System.Drawing.Size(732, 747);
             this.tabHome.TabIndex = 0;
@@ -117,7 +116,7 @@
             this.Phome.Controls.Add(this.Blogout);
             this.Phome.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Phome.Location = new System.Drawing.Point(0, 0);
-            this.Phome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Phome.Margin = new System.Windows.Forms.Padding(4);
             this.Phome.Name = "Phome";
             this.Phome.Size = new System.Drawing.Size(732, 747);
             this.Phome.TabIndex = 7;
@@ -140,7 +139,7 @@
             this.Ptransfer.Controls.Add(this.Ltfrom);
             this.Ptransfer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Ptransfer.Location = new System.Drawing.Point(0, 0);
-            this.Ptransfer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Ptransfer.Margin = new System.Windows.Forms.Padding(4);
             this.Ptransfer.Name = "Ptransfer";
             this.Ptransfer.Size = new System.Drawing.Size(732, 747);
             this.Ptransfer.TabIndex = 6;
@@ -152,7 +151,7 @@
             this.Bback.BackgroundImage = global::BankManagmentSystem.Properties.Resources.computer_icons_download_back_icon;
             this.Bback.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Bback.Location = new System.Drawing.Point(672, 2);
-            this.Bback.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Bback.Margin = new System.Windows.Forms.Padding(4);
             this.Bback.Name = "Bback";
             this.Bback.Size = new System.Drawing.Size(53, 49);
             this.Bback.TabIndex = 12;
@@ -180,7 +179,7 @@
             this.TBaccountNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TBaccountNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TBaccountNum.Location = new System.Drawing.Point(97, 362);
-            this.TBaccountNum.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TBaccountNum.Margin = new System.Windows.Forms.Padding(4);
             this.TBaccountNum.Name = "TBaccountNum";
             this.TBaccountNum.Size = new System.Drawing.Size(255, 30);
             this.TBaccountNum.TabIndex = 4;
@@ -206,7 +205,7 @@
             this.BConfirmTransfer.BackColor = System.Drawing.Color.White;
             this.BConfirmTransfer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BConfirmTransfer.Location = new System.Drawing.Point(237, 608);
-            this.BConfirmTransfer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BConfirmTransfer.Margin = new System.Windows.Forms.Padding(4);
             this.BConfirmTransfer.Name = "BConfirmTransfer";
             this.BConfirmTransfer.Size = new System.Drawing.Size(179, 48);
             this.BConfirmTransfer.TabIndex = 8;
@@ -244,7 +243,7 @@
             this.TBamount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TBamount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TBamount.Location = new System.Drawing.Point(97, 474);
-            this.TBamount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TBamount.Margin = new System.Windows.Forms.Padding(4);
             this.TBamount.Name = "TBamount";
             this.TBamount.Size = new System.Drawing.Size(255, 30);
             this.TBamount.TabIndex = 5;
@@ -286,6 +285,7 @@
             this.Ltransferfrom.Size = new System.Drawing.Size(91, 33);
             this.Ltransferfrom.TabIndex = 1;
             this.Ltransferfrom.Text = "10001";
+            this.Ltransferfrom.Click += new System.EventHandler(this.Ltransferfrom_Click);
             // 
             // Ltfrom
             // 
@@ -330,7 +330,7 @@
             this.Btopup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Btopup.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btopup.Location = new System.Drawing.Point(576, 448);
-            this.Btopup.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btopup.Margin = new System.Windows.Forms.Padding(4);
             this.Btopup.Name = "Btopup";
             this.Btopup.Size = new System.Drawing.Size(91, 87);
             this.Btopup.TabIndex = 7;
@@ -345,7 +345,7 @@
             this.Butility.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Butility.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Butility.Location = new System.Drawing.Point(323, 454);
-            this.Butility.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Butility.Margin = new System.Windows.Forms.Padding(4);
             this.Butility.Name = "Butility";
             this.Butility.Size = new System.Drawing.Size(91, 81);
             this.Butility.TabIndex = 6;
@@ -368,7 +368,7 @@
             this.panel1.Controls.Add(this.Lbalance);
             this.panel1.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.panel1.Location = new System.Drawing.Point(107, 90);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(543, 241);
             this.panel1.TabIndex = 0;
@@ -406,7 +406,7 @@
             this.BseeBalance.FlatAppearance.BorderSize = 0;
             this.BseeBalance.ForeColor = System.Drawing.Color.Black;
             this.BseeBalance.Location = new System.Drawing.Point(351, 76);
-            this.BseeBalance.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BseeBalance.Margin = new System.Windows.Forms.Padding(4);
             this.BseeBalance.Name = "BseeBalance";
             this.BseeBalance.Size = new System.Drawing.Size(37, 32);
             this.BseeBalance.TabIndex = 1;
@@ -440,6 +440,7 @@
             this.Ldispalybalance.Size = new System.Drawing.Size(98, 32);
             this.Ldispalybalance.TabIndex = 4;
             this.Ldispalybalance.Text = "*******";
+            this.Ldispalybalance.Click += new System.EventHandler(this.Ldispalybalance_Click);
             // 
             // Laccount
             // 
@@ -474,7 +475,7 @@
             this.Btransfer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Btransfer.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btransfer.Location = new System.Drawing.Point(61, 448);
-            this.Btransfer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btransfer.Margin = new System.Windows.Forms.Padding(4);
             this.Btransfer.Name = "Btransfer";
             this.Btransfer.Size = new System.Drawing.Size(91, 87);
             this.Btransfer.TabIndex = 2;
@@ -540,13 +541,14 @@
             this.tabTransaction.Controls.Add(this.label7);
             this.tabTransaction.Controls.Add(this.Blogout1);
             this.tabTransaction.Location = new System.Drawing.Point(4, 31);
-            this.tabTransaction.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabTransaction.Margin = new System.Windows.Forms.Padding(4);
             this.tabTransaction.Name = "tabTransaction";
-            this.tabTransaction.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabTransaction.Padding = new System.Windows.Forms.Padding(4);
             this.tabTransaction.Size = new System.Drawing.Size(732, 747);
             this.tabTransaction.TabIndex = 1;
             this.tabTransaction.Text = "Transactions";
             this.tabTransaction.UseVisualStyleBackColor = true;
+            this.tabTransaction.Click += new System.EventHandler(this.tabTransaction_Click);
             this.tabTransaction.Enter += new System.EventHandler(this.tabTransaction_Enter);
             // 
             // panel2
@@ -573,6 +575,7 @@
             this.DGtransactions.RowTemplate.Height = 24;
             this.DGtransactions.Size = new System.Drawing.Size(689, 639);
             this.DGtransactions.TabIndex = 0;
+            this.DGtransactions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGtransactions_CellContentClick);
             // 
             // label7
             // 
