@@ -15,7 +15,7 @@ namespace BankManagmentSystem
     {
         const string storedProcedureName = "PROCESSTRANSACTION";
         string name, balance, accnum;
-        string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xepdb1;";
+        string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xe;";
         string accQuary = "select * from ACCOUNT WHERE USER_NAME = :user_name";
         string custQuary = "select * from CUSTOMER WHERE USER_NAME = :user_name";
         bool balanceVisible;
@@ -161,80 +161,104 @@ namespace BankManagmentSystem
             }
             else
             {
+
                 using (OracleConnection connection = new OracleConnection(connectionString))
                 {
-                    string sqlQuery = "SELECT COUNT(*) FROM ACCOUNT WHERE ACCOUNT_NUMBER = :accnum";
-
-                    try
+                    int freezeValue=0;
+                    connection.Open();
+                    string sql = "SELECT FREEZE FROM ACCOUNT WHERE ACCOUNT_NUMBER = :accnum";
+                    using (OracleCommand com = new OracleCommand(sql, connection))
                     {
-                        connection.Open();
-                        using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                        com.Parameters.Add(new OracleParameter("accnum", accnum));
+                        using (OracleDataReader re = com.ExecuteReader())
                         {
-                            command.Parameters.Add(":accnum", OracleDbType.Varchar2).Value = TBaccountNum.Text;
-                            using (OracleDataReader reader = command.ExecuteReader())
+                            if (re.Read())
                             {
-                                int count = Convert.ToInt32(command.ExecuteScalar());
+                                    freezeValue = re.GetInt32(re.GetOrdinal("FREEZE"));
+                            }
+                            re.Close();
+                        }
+                    }
+                    if (freezeValue == 1)
+                    {
+                        MessageBox.Show("Account is frozen.", "Freeze Status", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        string sqlQuery = "SELECT COUNT(*) FROM ACCOUNT WHERE ACCOUNT_NUMBER = :accnum";
 
-                                if (count > 0 && TBaccountNum.Text!=accnum)
+                        try
+                        {
+                            connection.Open();
+                            using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                            {
+                                command.Parameters.Add(":accnum", OracleDbType.Varchar2).Value = TBaccountNum.Text;
+                                using (OracleDataReader reader = command.ExecuteReader())
                                 {
-                                    using (OracleConnection conne = new OracleConnection(connectionString))
+                                    int count = Convert.ToInt32(command.ExecuteScalar());
+
+                                    if (count > 0 && TBaccountNum.Text != accnum)
                                     {
-                                        try
+                                        using (OracleConnection conne = new OracleConnection(connectionString))
                                         {
-                                            conne.Open();
-                                            using (OracleCommand commands = new OracleCommand($"Select first_name,last_name from customer where user_name=(select user_name from account where account.account_number =:TBaccountNum)", connection))
+                                            try
                                             {
-                                                commands.Parameters.Add(":TBaccountNum", OracleDbType.Varchar2).Value = TBaccountNum.Text;
-
-                                                using (OracleDataReader readers = commands.ExecuteReader())
+                                                conne.Open();
+                                                using (OracleCommand commands = new OracleCommand($"Select first_name,last_name from customer where user_name=(select user_name from account where account.account_number =:TBaccountNum)", connection))
                                                 {
-                                                    readers.Read();
-                                                    string fName = readers["first_name"].ToString();
-                                                    string lName = readers["last_name"].ToString();
-                                                    MessageBox.Show($"      Transaction successful!!\nETB {TBamount.Text} transferred to {fName+" "+lName}");
+                                                    commands.Parameters.Add(":TBaccountNum", OracleDbType.Varchar2).Value = TBaccountNum.Text;
+
+                                                    using (OracleDataReader readers = commands.ExecuteReader())
+                                                    {
+                                                        readers.Read();
+                                                        string fName = readers["first_name"].ToString();
+                                                        string lName = readers["last_name"].ToString();
+                                                        MessageBox.Show($"      Transaction successful!!\nETB {TBamount.Text} transferred to {fName + " " + lName}");
+                                                    }
                                                 }
-                                            }
 
-                                            using (OracleCommand comm = new OracleCommand(storedProcedureName, conne))
+                                                using (OracleCommand comm = new OracleCommand(storedProcedureName, conne))
+                                                {
+                                                    // Specify that the command is a stored procedure
+                                                    comm.CommandType = System.Data.CommandType.StoredProcedure;
+
+                                                    // Add parameters to the stored procedure
+                                                    comm.Parameters.Add("p_account_number_from", OracleDbType.Varchar2).Value = accnum;
+                                                    comm.Parameters.Add("p_account_number_to", OracleDbType.Varchar2).Value = TBaccountNum.Text;
+                                                    comm.Parameters.Add("p_amount", OracleDbType.Varchar2).Value = TBamount.Text;
+                                                    balance = int.Parse(balance) - int.Parse(TBamount.Text) + "";
+
+                                                    // Execute the stored procedure
+                                                    comm.ExecuteNonQuery();
+                                                }
+
+                                                // Close the connection
+                                                conne.Close();
+                                                connection.Close();
+                                            }
+                                            catch (Exception ex)
                                             {
-                                                // Specify that the command is a stored procedure
-                                                comm.CommandType = System.Data.CommandType.StoredProcedure;
-
-                                                // Add parameters to the stored procedure
-                                                comm.Parameters.Add("p_account_number_from", OracleDbType.Varchar2).Value = accnum;
-                                                comm.Parameters.Add("p_account_number_to", OracleDbType.Varchar2).Value = TBaccountNum.Text;
-                                                comm.Parameters.Add("p_amount", OracleDbType.Varchar2).Value = TBamount.Text;
-                                                balance = int.Parse(balance) - int.Parse(TBamount.Text) + "";
-
-                                                // Execute the stored procedure
-                                                comm.ExecuteNonQuery();
+                                                MessageBox.Show(ex.Message);
                                             }
-
-                                            // Close the connection
-                                            conne.Close();
-                                            connection.Close();
                                         }
-                                        catch (Exception ex)
-                                        {
-                                            MessageBox.Show(ex.Message);
-                                        }
+                                        Ptransfer.Visible = false;
+                                        BseeBalance.TabStop = true;
+                                        Btransfer.TabStop = true;
+                                        Blogout.TabStop = true;
                                     }
-                                    Ptransfer.Visible = false;
-                                    BseeBalance.TabStop = true;
-                                    Btransfer.TabStop = true;
-                                    Blogout.TabStop = true;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Account number doesn't exist");
+                                    else
+                                    {
+                                        MessageBox.Show("Account number doesn't exist");
+                                    }
                                 }
                             }
                         }
+                        catch (OracleException ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                     }
-                    catch (OracleException ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+                    
                 }
             }
         }
