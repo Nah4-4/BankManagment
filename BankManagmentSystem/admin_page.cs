@@ -14,7 +14,7 @@ namespace BankManagmentSystem
 {
     public partial class admin_page : Form
     {
-        string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xepdb1;";
+        string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xe;";
         public static admin_page Instance = new admin_page();
         int index;
         string acc;
@@ -26,7 +26,36 @@ namespace BankManagmentSystem
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            
+            string partialAccountNumber = textBox1.Text;
 
+            // Construct the SQL query using the partial account number with wildcard (%)
+            string sqlQuery = $"SELECT a.account_number, c.* FROM customer c LEFT JOIN account a ON c.user_name = a.USER_NAME WHERE a.account_number LIKE '{partialAccountNumber}%'";
+
+            // Wrap database interactions in a try-catch block for error handling
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(connectionString))
+                {
+                    connection.Open();
+                    using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                    {
+                        using (OracleDataReader reader = command.ExecuteReader())
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable.Load(reader);
+                            dataTable.Columns[0].ReadOnly = true;
+                            dataTable.Columns[1].ReadOnly = true;
+                            dataTable.Columns[6].ReadOnly = true;
+                            display.DataSource = dataTable;
+                        }
+                    }
+                }
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -253,6 +282,52 @@ namespace BankManagmentSystem
             }
 
 
+        }
+
+        private void textBox1_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+        }
+
+        private void textBox2_Click(object sender, EventArgs e)
+        {
+            textBox2.Text = "";
+            textBox1.Text = "";
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            
+            string partialusername = textBox2.Text;
+
+            // Construct the SQL query using the partial account number with wildcard (%)
+            string sqlQuery = $"SELECT a.account_number, c.* FROM customer c LEFT JOIN account a ON c.user_name = a.USER_NAME WHERE a.user_name LIKE '{partialusername}%'";
+
+            // Wrap database interactions in a try-catch block for error handling
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(connectionString))
+                {
+                    connection.Open();
+                    using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                    {
+                        using (OracleDataReader reader = command.ExecuteReader())
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable.Load(reader);
+                            dataTable.Columns[0].ReadOnly = true;
+                            dataTable.Columns[1].ReadOnly = true;
+                            dataTable.Columns[6].ReadOnly = true;
+                            display.DataSource = dataTable;
+                        }
+                    }
+                }
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

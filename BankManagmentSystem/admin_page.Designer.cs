@@ -32,20 +32,22 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.Btntransaction = new System.Windows.Forms.Button();
             this.Btnedit = new System.Windows.Forms.Button();
-
             this.freeze_btn = new System.Windows.Forms.Button();
             this.Btnexit = new System.Windows.Forms.Button();
             this.Btninfo = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.display)).BeginInit();
             this.SuspendLayout();
             // 
             // display
             // 
+            this.display.AllowUserToAddRows = false;
             this.display.AllowUserToDeleteRows = false;
-            this.display.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.display.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.display.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.display.Location = new System.Drawing.Point(40, 92);
             this.display.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.display.MultiSelect = false;
             this.display.Name = "display";
             this.display.RowHeadersWidth = 25;
             this.display.RowTemplate.Height = 24;
@@ -57,11 +59,13 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(310, 40);
+            this.textBox1.Location = new System.Drawing.Point(114, 46);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(229, 26);
+            this.textBox1.Size = new System.Drawing.Size(229, 22);
             this.textBox1.TabIndex = 1;
+            this.textBox1.Text = "search by account number";
+            this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Btntransaction
@@ -88,7 +92,7 @@
             // 
             // freeze_btn
             // 
-            this.freeze_btn.Location = new System.Drawing.Point(558, 592);
+            this.freeze_btn.Location = new System.Drawing.Point(597, 745);
             this.freeze_btn.Name = "freeze_btn";
             this.freeze_btn.Size = new System.Drawing.Size(180, 41);
             this.freeze_btn.TabIndex = 4;
@@ -118,16 +122,26 @@
             this.Btninfo.UseVisualStyleBackColor = true;
             this.Btninfo.Click += new System.EventHandler(this.Btninfo_Click);
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(403, 45);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(247, 22);
+            this.textBox2.TabIndex = 15;
+            this.textBox2.Text = "search by user-name";
+            this.textBox2.Click += new System.EventHandler(this.textBox2_Click);
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
             // admin_page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1221, 826);
             this.ControlBox = false;
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.Btninfo);
             this.Controls.Add(this.Btnexit);
             this.Controls.Add(this.freeze_btn);
-
             this.Controls.Add(this.Btnedit);
             this.Controls.Add(this.Btntransaction);
             this.Controls.Add(this.textBox1);
@@ -151,5 +165,6 @@
         private System.Windows.Forms.Button freeze_btn;
         private System.Windows.Forms.Button Btnexit;
         private System.Windows.Forms.Button Btninfo;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
