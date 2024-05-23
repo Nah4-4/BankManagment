@@ -62,13 +62,13 @@ namespace BankManagmentSystem
                         }
                         else
                         {
-                            MessageBox.Show("Error :\n          Wrong Password or User Name");
+                            MessageBox.Show("Error :\n              Wrong Password or User Name");
                         }
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
-                        MessageBox.Show("Error : \n            An Error Occured please try again");
+                        MessageBox.Show("Error :\n              An Error Occured please try again");
                     }
                 }
             }          
