@@ -15,7 +15,6 @@ namespace BankManagmentSystem
 {
     public partial class admin_page : Form
     {
-        OracleConnection connection;
         string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xepdb1;";
         public static admin_page Instance = new admin_page();
         public admin_page()
@@ -46,7 +45,7 @@ namespace BankManagmentSystem
 
         private void Btntransaction_Click(object sender, EventArgs e)
         {
-            using (connection = new OracleConnection(connectionString))
+            using (OracleConnection connection = new OracleConnection(connectionString))
             {
                 string sqlQuery = "SELECT amount,transferred_from,transferred_to,transaction_date FROM TRANSACTION";
                 try
@@ -78,7 +77,7 @@ namespace BankManagmentSystem
         }
         private void customer_info()
         {
-            using (connection = new OracleConnection(connectionString))
+            using (OracleConnection connection = new OracleConnection(connectionString))
             {
                 string sqlQuery = "SELECT a.account_number,c.* FROM customer c LEFT JOIN account a ON c.user_name=a.USER_NAME";
                 try
