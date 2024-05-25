@@ -76,7 +76,6 @@
             this.TBpassword.PasswordChar = '*';
             this.TBpassword.Size = new System.Drawing.Size(376, 33);
             this.TBpassword.TabIndex = 10;
-            this.TBpassword.Text = "admin";
             this.TBpassword.WordWrap = false;
             this.TBpassword.TextChanged += new System.EventHandler(this.TBpassword_TextChanged);
             // 

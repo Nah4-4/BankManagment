@@ -155,6 +155,7 @@ namespace BankManagmentSystem
         }
         private void Btninfo_Click(object sender, EventArgs e)
         {
+            display.ReadOnly = false;
             customer_info();
         }
 
