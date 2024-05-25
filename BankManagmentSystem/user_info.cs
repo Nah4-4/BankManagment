@@ -189,7 +189,7 @@ namespace BankManagmentSystem
 
                         try
                         {
-                            connection.Open();
+                            
                             using (OracleCommand command = new OracleCommand(sqlQuery, connection))
                             {
                                 command.Parameters.Add(":accnum", OracleDbType.Varchar2).Value = TBaccountNum.Text;
