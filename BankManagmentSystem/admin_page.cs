@@ -14,7 +14,7 @@ namespace BankManagmentSystem
 {
     public partial class admin_page : Form
     {
-        string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xe;";
+        string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xepdb1;";
         public static admin_page Instance = new admin_page();
         int index;
         string acc;
@@ -24,39 +24,6 @@ namespace BankManagmentSystem
             Instance = this;
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            
-            string partialAccountNumber = textBox1.Text;
-
-            // Construct the SQL query using the partial account number with wildcard (%)
-            string sqlQuery = $"SELECT a.account_number, c.* FROM customer c LEFT JOIN account a ON c.user_name = a.USER_NAME WHERE a.account_number LIKE '{partialAccountNumber}%'";
-
-            // Wrap database interactions in a try-catch block for error handling
-            try
-            {
-                using (OracleConnection connection = new OracleConnection(connectionString))
-                {
-                    connection.Open();
-                    using (OracleCommand command = new OracleCommand(sqlQuery, connection))
-                    {
-                        using (OracleDataReader reader = command.ExecuteReader())
-                        {
-                            DataTable dataTable = new DataTable();
-                            dataTable.Load(reader);
-                            dataTable.Columns[0].ReadOnly = true;
-                            dataTable.Columns[1].ReadOnly = true;
-                            dataTable.Columns[6].ReadOnly = true;
-                            display.DataSource = dataTable;
-                        }
-                    }
-                }
-            }
-            catch (OracleException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -125,6 +92,12 @@ namespace BankManagmentSystem
 
         private void Btntransaction_Click(object sender, EventArgs e)
         {
+            TBtransferTo.Text = "Transferred To";
+            TBtrasferFrom.Text = "Transferred From";
+            textBox1.Visible = false;
+            textBox2.Visible = false;
+            TBtransferTo.Visible = true;
+            TBtrasferFrom.Visible = true;
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
                 string sqlQuery = "SELECT amount,transferred_from,transferred_to,transaction_date FROM TRANSACTION";
@@ -173,6 +146,9 @@ namespace BankManagmentSystem
                             dataTable.Columns[1].ReadOnly = true;
                             dataTable.Columns[6].ReadOnly = true;
                             display.DataSource = dataTable;
+                            display.Columns[0].Width = 130;
+                            display.Columns[1].Width = 90;
+                            display.Columns[5].Width = 90;
                         }
                     }
                 }
@@ -184,6 +160,12 @@ namespace BankManagmentSystem
         }
         private void Btninfo_Click(object sender, EventArgs e)
         {
+            textBox1.Text = " Account Number";
+            textBox2.Text = " User-Name";
+            textBox1.Visible = true;
+            textBox2.Visible = true;
+            TBtransferTo.Visible = false;
+            TBtrasferFrom.Visible = false;
             display.ReadOnly = false;
             customer_info();
         }
@@ -192,7 +174,6 @@ namespace BankManagmentSystem
         private void display_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             row.Add(e.RowIndex);
-            //MessageBox.Show(display.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
             
         }
 
@@ -244,59 +225,91 @@ namespace BankManagmentSystem
 
         private void display_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            index = e.RowIndex;
-            DataGridViewRow row = display.Rows[index];
-            acc = row.Cells[0].Value.ToString();
-            using (OracleConnection connection = new OracleConnection(connectionString))
+            if (e.RowIndex >= 0)
             {
-                try
+                index = e.RowIndex;
+                DataGridViewRow row = display.Rows[index];
+                acc = row.Cells[0].Value.ToString();
+                using (OracleConnection connection = new OracleConnection(connectionString))
                 {
-                    connection.Open();
-
-                    string sqlQuery = "SELECT FREEZE FROM ACCOUNT WHERE ACCOUNT_NUMBER = :accnum";
-                    OracleCommand command = new OracleCommand(sqlQuery, connection);
-                    command.Parameters.Add(new OracleParameter("accnum", acc));
-
-                    OracleDataReader reader = command.ExecuteReader();
-
-                    if (reader.Read())
+                    try
                     {
-                        int freezeValue = Convert.ToInt32(reader["FREEZE"]);
-                        if (freezeValue == 1)
-                        {
-                            freeze_btn.Text = "UNFREEZE";
-                        }
-                        else
-                        {
-                            freeze_btn.Text = "FREEZE";
-                        }
-                    }
- 
+                        connection.Open();
 
-                    reader.Close();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error: " + ex.Message);
-                    
+                        string sqlQuery = "SELECT FREEZE FROM ACCOUNT WHERE ACCOUNT_NUMBER = :accnum";
+                        OracleCommand command = new OracleCommand(sqlQuery, connection);
+                        command.Parameters.Add(new OracleParameter("accnum", acc));
+
+                        OracleDataReader reader = command.ExecuteReader();
+
+                        if (reader.Read())
+                        {
+                            int freezeValue = Convert.ToInt32(reader["FREEZE"]);
+                            if (freezeValue == 1)
+                            {
+                                freeze_btn.Text = "UNFREEZE";
+                            }
+                            else
+                            {
+                                freeze_btn.Text = "FREEZE";
+                            }
+                        }
+
+
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error: " + ex.Message);
+
+                    }
                 }
             }
-
-
         }
 
         private void textBox1_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
-            textBox2.Text = "";
         }
 
         private void textBox2_Click(object sender, EventArgs e)
         {
             textBox2.Text = "";
-            textBox1.Text = "";
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+            string partialAccountNumber = textBox1.Text;
+
+            // Construct the SQL query using the partial account number with wildcard (%)
+            string sqlQuery = $"SELECT a.account_number, c.* FROM customer c LEFT JOIN account a ON c.user_name = a.USER_NAME WHERE a.account_number LIKE '{partialAccountNumber}%'";
+
+            // Wrap database interactions in a try-catch block for error handling
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(connectionString))
+                {
+                    connection.Open();
+                    using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                    {
+                        using (OracleDataReader reader = command.ExecuteReader())
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable.Load(reader);
+                            dataTable.Columns[0].ReadOnly = true;
+                            dataTable.Columns[1].ReadOnly = true;
+                            dataTable.Columns[6].ReadOnly = true;
+                            display.DataSource = dataTable;
+                        }
+                    }
+                }
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             
@@ -321,6 +334,70 @@ namespace BankManagmentSystem
                             dataTable.Columns[1].ReadOnly = true;
                             dataTable.Columns[6].ReadOnly = true;
                             display.DataSource = dataTable;
+                        }
+                    }
+                }
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TBtrasferFrom_TextChanged(object sender, EventArgs e)
+        {
+            string x = TBtrasferFrom.Text;
+            string sqlQuery = $"SELECT amount,transferred_from,transferred_to,transaction_date FROM TRANSACTION WHERE transferred_from LIKE '{x}%'";
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(connectionString))
+                {
+                    connection.Open();
+                    using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                    {
+                        using (OracleDataReader reader = command.ExecuteReader())
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable.Load(reader);
+                            display.DataSource = dataTable;
+                            display.ReadOnly = true;
+                        }
+                    }
+                }
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TBtrasferFrom_Click(object sender, EventArgs e)
+        {
+            TBtrasferFrom.Text = "";
+        }
+
+        private void TBtransferTo_Click(object sender, EventArgs e)
+        {
+            TBtransferTo.Text = "";
+        }
+
+        private void TBtransferTo_TextChanged(object sender, EventArgs e)
+        {
+            string x = TBtransferTo.Text;
+            string sqlQuery = $"SELECT amount,transferred_from,transferred_to,transaction_date FROM TRANSACTION WHERE transferred_to LIKE '{x}%'";
+            try
+            {
+                using (OracleConnection connection = new OracleConnection(connectionString))
+                {
+                    connection.Open();
+                    using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                    {
+                        using (OracleDataReader reader = command.ExecuteReader())
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable.Load(reader);
+                            display.DataSource = dataTable;
+                            display.ReadOnly = true;
                         }
                     }
                 }

@@ -15,7 +15,7 @@ namespace BankManagmentSystem
     {
         const string storedProcedureName = "PROCESSTRANSACTION";
         string name, balance, accnum;
-        string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xe;";
+        string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xepdb1;";
         string accQuary = "select * from ACCOUNT WHERE USER_NAME = :user_name";
         string custQuary = "select * from CUSTOMER WHERE USER_NAME = :user_name";
         bool balanceVisible;

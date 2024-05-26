@@ -83,16 +83,6 @@ namespace BankManagmentSystem
                       
         }
 
-        private void TBname_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TBpassword_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void LLcreateaccount_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Instance.Hide();
