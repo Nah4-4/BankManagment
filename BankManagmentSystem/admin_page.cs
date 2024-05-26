@@ -5,10 +5,12 @@ using System.Data;
 using System.Data.Common;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace BankManagmentSystem
 {
@@ -87,6 +89,12 @@ namespace BankManagmentSystem
 
         private void admin_page_Load(object sender, EventArgs e)
         {
+            list.Items.AddRange(new object[] {
+            "All",
+            "Payed",
+            "Active"});
+            list.DropDownStyle = ComboBoxStyle.DropDownList;
+
             customer_info();
         }
 
@@ -413,6 +421,59 @@ namespace BankManagmentSystem
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void list_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedValue = (string)list.SelectedItem;
+
+            // Perform different actions based on the selected item
+            switch (selectedValue)
+            {
+                case "All":
+                    string sql = "select * from loan";
+                    Loan(sql);
+                    break;
+                case "Payed":
+                    string sq = "select * from loan where status = 'payed'";
+                    Loan(sq);
+                    break;
+                case "Active":
+                    string s = "select * from loan where status = 'active'";
+                    Loan(s);
+                    break;
+            }
+        }
+        void Loan(string sqlQuery)
+        {
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                    {
+                        using (OracleDataReader reader = command.ExecuteReader())
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable.Load(reader);
+                            for(int i = 0; i < 7; i++)
+                            {
+                                dataTable.Columns[i].ReadOnly = true;
+                            }
+                            display.DataSource = dataTable;
+                            //display.Columns[0].Width = 130;
+                            //display.Columns[1].Width = 90;
+                            //display.Columns[5].Width = 90;
+                        }
+                    }
+                }
+                catch (OracleException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+        
     }
 }
 

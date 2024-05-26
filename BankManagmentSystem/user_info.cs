@@ -385,7 +385,9 @@ namespace BankManagmentSystem
 
         private void BtnpayFull_Click(object sender, EventArgs e)
         {
-            if(int.Parse(balance) > int.Parse(LremainLoan.Text))
+            int balanceValue;
+            int remainLoanValue;
+            if (int.TryParse(balance, out balanceValue) && int.TryParse(LremainLoan.Text, out remainLoanValue))
             {
                 using (OracleConnection connection = new OracleConnection(connectionString))
                 {
