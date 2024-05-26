@@ -108,7 +108,6 @@ namespace BankManagmentSystem
                                     while (reader.Read())
                                     {
                                         lastUserName = reader.GetString(0);
-                                        Console.WriteLine(lastUserName);
                                     }
 
                                     // Show message box with the last user_name and password
