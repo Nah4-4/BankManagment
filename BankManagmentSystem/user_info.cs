@@ -13,9 +13,10 @@ namespace BankManagmentSystem
 {
     public partial class user_info : Form
     {
+
         const string storedProcedureName = "PROCESSTRANSACTION";
         string name, balance, accnum;
-        string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xepdb1;";
+        string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xe;";
         string accQuary = "select * from ACCOUNT WHERE USER_NAME = :user_name";
         string custQuary = "select * from CUSTOMER WHERE USER_NAME = :user_name";
         bool balanceVisible;
@@ -28,6 +29,7 @@ namespace BankManagmentSystem
 
         private void user_info_Load(object sender, EventArgs e)
         {
+            date.MinDate = DateTime.Now;
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
                 try
@@ -67,7 +69,6 @@ namespace BankManagmentSystem
             Lname.Text = name;
             Ldisplayaccount.Text = accnum;
             Ltransferfrom.Text = accnum;
-            available.Text = balance;
             Ldate.Text = DateTime.Today.ToString("ddd MMM dd,yyy");
         }
         private void BseeBalance_Click(object sender, EventArgs e)
@@ -81,6 +82,7 @@ namespace BankManagmentSystem
 
         private void Btransfer_Click(object sender, EventArgs e)
         {
+            available.Text = balance;
             Ptransfer.Visible = true;
             Btransfer.TabStop = false;
             BseeBalance.TabStop = false;
@@ -293,9 +295,137 @@ namespace BankManagmentSystem
 
         }
 
+        private void Ptransfer_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void GetL_Click(object sender, EventArgs e)
+        {
+            if(IsNumber(amount.Text))
+            {
+                if (!AccountNumberOnLoan(int.Parse(accnum))){
+                    DateTime selectedDate = date.Value;
+                    IssueLoan(int.Parse(accnum), int.Parse(amount.Text),selectedDate);
+                    balance = (int.Parse(balance) + int.Parse(amount.Text)) + "";
+                    UpdateAccountBalance(int.Parse(accnum),int.Parse(balance));
+                }
+                else
+                {
+                    MessageBox.Show("Please Pay Your Loan First.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("The amount is not a valid number.");
+            }
+        }
+
+        private bool AccountNumberOnLoan(int accountNumber)
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT COUNT(*) FROM Loan WHERE account_number = :accountNumber AND status = 'active'";
+                    OracleCommand cmd = new OracleCommand(query, conn);
+                    cmd.Parameters.Add(new OracleParameter("accountNumber", accountNumber));
+
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    
+                    return count > 0;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+        private void IssueLoan(int accountNumber, decimal amount, DateTime endDate)
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    OracleCommand cmd = new OracleCommand("IssueLoan", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Adding parameters
+                    cmd.Parameters.Add("p_account_number", OracleDbType.Int32).Value = accountNumber;
+                    cmd.Parameters.Add("p_amount", OracleDbType.Decimal).Value = amount;
+                    cmd.Parameters.Add("p_end_date", OracleDbType.Date).Value = endDate;
+                    
+
+                    // Execute the command
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Loan issued successfully.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
+        private bool UpdateAccountBalance(int accountNumber, decimal newBalance)
+        {
+            
+
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "UPDATE Account SET balance = :newBalance WHERE account_number = :accountNumber";
+                    OracleCommand cmd = new OracleCommand(query, conn);
+                    cmd.Parameters.Add(new OracleParameter("newBalance", newBalance));
+                    cmd.Parameters.Add(new OracleParameter("accountNumber", accountNumber));
+
+                    // Execute the update command
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    // If one or more rows were affected, the update was successful
+                    return rowsAffected > 0;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return false;
+                }
+            }
+        }
         private void TBaccountNum_Enter(object sender, EventArgs e)
         {
             label5.Visible = false;
+        }
+
+        private void available_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void Bback_Click(object sender, EventArgs e)
@@ -304,6 +434,13 @@ namespace BankManagmentSystem
             BseeBalance.TabStop = true;
             Btransfer.TabStop = true;
             Blogout.TabStop = true;
+        }
+        private bool IsNumber(string text)
+        {
+            int intResult;
+            decimal decimalResult;
+            // Check if the text is a valid integer or a valid decimal
+            return int.TryParse(text, out intResult) || decimal.TryParse(text, out decimalResult);
         }
     }
 }

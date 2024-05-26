@@ -66,6 +66,12 @@
             this.DGtransactions = new System.Windows.Forms.DataGridView();
             this.label7 = new System.Windows.Forms.Label();
             this.Blogout1 = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.date = new System.Windows.Forms.DateTimePicker();
+            this.GetL = new System.Windows.Forms.Button();
+            this.amount = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.Phome.SuspendLayout();
@@ -74,12 +80,14 @@
             this.tabTransaction.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGtransactions)).BeginInit();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabHome);
             this.tabControl1.Controls.Add(this.tabTransaction);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
@@ -144,6 +152,7 @@
             this.Ptransfer.Size = new System.Drawing.Size(732, 747);
             this.Ptransfer.TabIndex = 6;
             this.Ptransfer.Visible = false;
+            this.Ptransfer.Paint += new System.Windows.Forms.PaintEventHandler(this.Ptransfer_Paint);
             // 
             // Bback
             // 
@@ -199,6 +208,7 @@
             this.available.Size = new System.Drawing.Size(40, 20);
             this.available.TabIndex = 10;
             this.available.Text = "0.00";
+            this.available.Click += new System.EventHandler(this.available_Click);
             // 
             // BConfirmTransfer
             // 
@@ -600,6 +610,64 @@
             this.Blogout1.UseVisualStyleBackColor = false;
             this.Blogout1.Click += new System.EventHandler(this.Blogout_Click);
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label10);
+            this.tabPage1.Controls.Add(this.label9);
+            this.tabPage1.Controls.Add(this.date);
+            this.tabPage1.Controls.Add(this.GetL);
+            this.tabPage1.Controls.Add(this.amount);
+            this.tabPage1.Location = new System.Drawing.Point(4, 31);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(732, 747);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Loan";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // date
+            // 
+            this.date.Location = new System.Drawing.Point(230, 281);
+            this.date.Name = "date";
+            this.date.Size = new System.Drawing.Size(384, 28);
+            this.date.TabIndex = 3;
+            this.date.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged_1);
+            // 
+            // GetL
+            // 
+            this.GetL.Location = new System.Drawing.Point(257, 480);
+            this.GetL.Name = "GetL";
+            this.GetL.Size = new System.Drawing.Size(151, 35);
+            this.GetL.TabIndex = 2;
+            this.GetL.Text = "Get";
+            this.GetL.UseVisualStyleBackColor = true;
+            this.GetL.Click += new System.EventHandler(this.GetL_Click);
+            // 
+            // amount
+            // 
+            this.amount.Location = new System.Drawing.Point(230, 154);
+            this.amount.Name = "amount";
+            this.amount.Size = new System.Drawing.Size(384, 28);
+            this.amount.TabIndex = 0;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(45, 158);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(123, 24);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Loan Amount";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(45, 281);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(135, 24);
+            this.label10.TabIndex = 5;
+            this.label10.Text = "Loan End Date";
+            // 
             // user_info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -625,6 +693,8 @@
             this.tabTransaction.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGtransactions)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -669,5 +739,11 @@
         private System.Windows.Forms.Button Butility;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TextBox amount;
+        private System.Windows.Forms.Button GetL;
+        private System.Windows.Forms.DateTimePicker date;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
     }
 }

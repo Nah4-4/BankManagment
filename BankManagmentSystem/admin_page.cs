@@ -14,7 +14,7 @@ namespace BankManagmentSystem
 {
     public partial class admin_page : Form
     {
-        string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xepdb1;";
+        string connectionString = $"User Id=" + Environment.GetEnvironmentVariable("USER_NAME") + ";Password=" + Environment.GetEnvironmentVariable("PASSWORD") + ";Data Source=localhost:1521/xe;";
         public static admin_page Instance = new admin_page();
         int index;
         string acc;
