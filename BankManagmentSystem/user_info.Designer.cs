@@ -31,16 +31,16 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
             this.Phome = new System.Windows.Forms.Panel();
-            this.Ptransfer = new System.Windows.Forms.Panel();
             this.PpayLoan = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.BtnpayFull = new System.Windows.Forms.Button();
             this.Btnback = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.LremainLoan = new System.Windows.Forms.Label();
             this.Btnpay = new System.Windows.Forms.Button();
             this.TBpay = new System.Windows.Forms.TextBox();
+            this.Ptransfer = new System.Windows.Forms.Panel();
             this.Bback = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.TBaccountNum = new System.Windows.Forms.TextBox();
@@ -80,8 +80,8 @@
             this.tabControl1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.Phome.SuspendLayout();
-            this.Ptransfer.SuspendLayout();
             this.PpayLoan.SuspendLayout();
+            this.Ptransfer.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabTransaction.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -133,29 +133,6 @@
             this.Phome.Size = new System.Drawing.Size(547, 604);
             this.Phome.TabIndex = 7;
             // 
-            // Ptransfer
-            // 
-            this.Ptransfer.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Ptransfer.BackgroundImage = global::BankManagmentSystem.Properties.Resources.AdobeStock_291217289_copy;
-            this.Ptransfer.Controls.Add(this.Bback);
-            this.Ptransfer.Controls.Add(this.label5);
-            this.Ptransfer.Controls.Add(this.TBaccountNum);
-            this.Ptransfer.Controls.Add(this.available);
-            this.Ptransfer.Controls.Add(this.BConfirmTransfer);
-            this.Ptransfer.Controls.Add(this.label4);
-            this.Ptransfer.Controls.Add(this.label3);
-            this.Ptransfer.Controls.Add(this.TBamount);
-            this.Ptransfer.Controls.Add(this.label2);
-            this.Ptransfer.Controls.Add(this.Lamount);
-            this.Ptransfer.Controls.Add(this.Ltransferfrom);
-            this.Ptransfer.Controls.Add(this.Ltfrom);
-            this.Ptransfer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Ptransfer.Location = new System.Drawing.Point(0, 0);
-            this.Ptransfer.Name = "Ptransfer";
-            this.Ptransfer.Size = new System.Drawing.Size(547, 604);
-            this.Ptransfer.TabIndex = 6;
-            this.Ptransfer.Visible = false;
-            // 
             // PpayLoan
             // 
             this.PpayLoan.BackColor = System.Drawing.Color.Silver;
@@ -163,8 +140,8 @@
             this.PpayLoan.Controls.Add(this.label12);
             this.PpayLoan.Controls.Add(this.BtnpayFull);
             this.PpayLoan.Controls.Add(this.Btnback);
-            this.PpayLoan.Controls.Add(this.label10);
-            this.PpayLoan.Controls.Add(this.label9);
+            this.PpayLoan.Controls.Add(this.label14);
+            this.PpayLoan.Controls.Add(this.label13);
             this.PpayLoan.Controls.Add(this.LremainLoan);
             this.PpayLoan.Controls.Add(this.Btnpay);
             this.PpayLoan.Controls.Add(this.TBpay);
@@ -208,27 +185,27 @@
             this.Btnback.UseVisualStyleBackColor = false;
             this.Btnback.Click += new System.EventHandler(this.Btnback_Click);
             // 
-            // label10
+            // label14
             // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(54, 254);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(125, 20);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Amount To Pay :";
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(54, 254);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(125, 20);
+            this.label14.TabIndex = 4;
+            this.label14.Text = "Amount To Pay :";
             // 
-            // label9
+            // label13
             // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(53, 161);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(193, 20);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "Remaining Loan Amount :";
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(53, 161);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(193, 20);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "Remaining Loan Amount :";
             // 
             // LremainLoan
             // 
@@ -258,6 +235,29 @@
             this.TBpay.Name = "TBpay";
             this.TBpay.Size = new System.Drawing.Size(154, 24);
             this.TBpay.TabIndex = 0;
+            // 
+            // Ptransfer
+            // 
+            this.Ptransfer.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Ptransfer.BackgroundImage = global::BankManagmentSystem.Properties.Resources.AdobeStock_291217289_copy;
+            this.Ptransfer.Controls.Add(this.Bback);
+            this.Ptransfer.Controls.Add(this.label5);
+            this.Ptransfer.Controls.Add(this.TBaccountNum);
+            this.Ptransfer.Controls.Add(this.available);
+            this.Ptransfer.Controls.Add(this.BConfirmTransfer);
+            this.Ptransfer.Controls.Add(this.label4);
+            this.Ptransfer.Controls.Add(this.label3);
+            this.Ptransfer.Controls.Add(this.TBamount);
+            this.Ptransfer.Controls.Add(this.label2);
+            this.Ptransfer.Controls.Add(this.Lamount);
+            this.Ptransfer.Controls.Add(this.Ltransferfrom);
+            this.Ptransfer.Controls.Add(this.Ltfrom);
+            this.Ptransfer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Ptransfer.Location = new System.Drawing.Point(0, 0);
+            this.Ptransfer.Name = "Ptransfer";
+            this.Ptransfer.Size = new System.Drawing.Size(547, 604);
+            this.Ptransfer.TabIndex = 6;
+            this.Ptransfer.Visible = false;
             // 
             // Bback
             // 
@@ -725,10 +725,10 @@
             this.tabHome.ResumeLayout(false);
             this.Phome.ResumeLayout(false);
             this.Phome.PerformLayout();
-            this.Ptransfer.ResumeLayout(false);
-            this.Ptransfer.PerformLayout();
             this.PpayLoan.ResumeLayout(false);
             this.PpayLoan.PerformLayout();
+            this.Ptransfer.ResumeLayout(false);
+            this.Ptransfer.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabTransaction.ResumeLayout(false);
@@ -780,8 +780,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel PpayLoan;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label LremainLoan;
         private System.Windows.Forms.Button Btnpay;
         private System.Windows.Forms.TextBox TBpay;
