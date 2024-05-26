@@ -282,15 +282,139 @@ namespace BankManagmentSystem
         {
 
         }
-
-        private void DGtransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Btnpay_Click(object sender, EventArgs e)
         {
-
+            if (TBpay.Text == "" || int.Parse(balance) < int.Parse(TBpay.Text))           
+                MessageBox.Show("INSUFFICIENT BALANCE!!");           
+            else
+            {
+                int payed = int.Parse(LremainLoan.Text) - int.Parse(TBpay.Text);
+                using (OracleConnection connection = new OracleConnection(connectionString))
+                {
+                    try
+                    {
+                        connection.Open();
+                        if (payed > 0)
+                        {
+                            string sqlQuery = "update loan set amount= :payed where account_number= :accnum";
+                            using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                            {
+                                command.Parameters.Add(":payed", OracleDbType.Varchar2).Value = payed;
+                                command.Parameters.Add(":accnum", OracleDbType.Varchar2).Value = accnum;
+                                command.ExecuteNonQuery();
+                            }
+                            string sqlQuer = "update account set balance= :sub where account_number = :accnum";
+                            using (OracleCommand command = new OracleCommand(sqlQuer, connection))
+                            {
+                                command.Parameters.Add(":sub", OracleDbType.Varchar2).Value = (int.Parse(balance) - int.Parse(TBpay.Text));
+                                command.Parameters.Add(":accnum", OracleDbType.Varchar2).Value = accnum;
+                                command.ExecuteNonQuery();
+                            }
+                            balance = (int.Parse(balance) - int.Parse(TBpay.Text)).ToString();
+                            MessageBox.Show(TBpay.Text+" ETB Payed");
+                        }
+                        else if (payed == 0)
+                        {
+                            string sqlQuery = "update loan set status= 'payed' where account_number= :accnum";
+                            using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                            {
+                                command.Parameters.Add(":accnum", OracleDbType.Varchar2).Value = accnum;
+                                command.ExecuteNonQuery();
+                            }
+                            string sqlQuer = "update account set balance= :sub where account_number = :accnum";
+                            using (OracleCommand command = new OracleCommand(sqlQuer, connection))
+                            {
+                                command.Parameters.Add(":sub", OracleDbType.Varchar2).Value = (int.Parse(balance) - int.Parse(TBpay.Text));
+                                command.Parameters.Add(":accnum", OracleDbType.Varchar2).Value = accnum;
+                                command.ExecuteNonQuery();
+                            }
+                            balance = (int.Parse(balance) - int.Parse(TBpay.Text)).ToString();
+                            MessageBox.Show(TBpay.Text + " ETB Payed");
+                        }
+                        else
+                            MessageBox.Show("Invalid Loan Payment"); 
+                    }
+                    catch (OracleException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+            PpayLoan.Visible = false;
         }
 
-        private void tabTransaction_Click(object sender, EventArgs e)
+        private void Btnloan_Click(object sender, EventArgs e)
         {
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string sqlQuery = "Select status from loan Where account_number= :accnum ";
+                    using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                    {
+                        command.Parameters.Add(":accnum", OracleDbType.Varchar2).Value = accnum;
+                        if (command.ExecuteScalar() == null || command.ExecuteScalar().ToString() == "payed" )
+                            MessageBox.Show("No Loans Available");
+                        else
+                        {
+                            PpayLoan.Visible = true;
+                            string sqlQuer = "Select amount from loan Where account_number= :accnum ";
+                            using (OracleCommand comman = new OracleCommand(sqlQuer, connection))
+                            {
+                                comman.Parameters.Add(":accnum", OracleDbType.Varchar2).Value = accnum;
+                                LremainLoan.Text = comman.ExecuteScalar().ToString();
 
+                            }
+                        }
+                    }
+                }
+                catch (OracleException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void Btnback_Click(object sender, EventArgs e)
+        {
+            PpayLoan.Visible = false;
+        }
+
+        private void BtnpayFull_Click(object sender, EventArgs e)
+        {
+            if(int.Parse(balance) > int.Parse(LremainLoan.Text))
+            {
+                using (OracleConnection connection = new OracleConnection(connectionString))
+                {
+                    try
+                    {
+                        connection.Open();
+                        string sqlQuery = "update loan set status= 'payed' where account_number= :accnum";
+                        using (OracleCommand command = new OracleCommand(sqlQuery, connection))
+                        {
+                            command.Parameters.Add(":accnum", OracleDbType.Varchar2).Value = accnum;
+                            command.ExecuteNonQuery();
+                        }
+                        string sqlQuer = "update account set balance= :sub where account_number = :accnum";
+                        using (OracleCommand command = new OracleCommand(sqlQuer, connection))
+                        {
+                            command.Parameters.Add(":sub", OracleDbType.Varchar2).Value = (int.Parse(balance) - int.Parse(LremainLoan.Text));
+                            command.Parameters.Add(":accnum", OracleDbType.Varchar2).Value = accnum;
+                            command.ExecuteNonQuery();
+                        }
+                        balance = (int.Parse(balance) - int.Parse(LremainLoan.Text)).ToString();
+                        MessageBox.Show(LremainLoan.Text + " ETB Payed");
+                    }
+                    catch (OracleException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+            else
+                MessageBox.Show("INSUFFICIENT BALANCE!!");
+            PpayLoan.Visible = false;
         }
 
         private void TBaccountNum_Enter(object sender, EventArgs e)

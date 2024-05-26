@@ -133,6 +133,16 @@ namespace BankManagmentSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _89586_200 {
+            get {
+                object obj = ResourceManager.GetObject("89586-200", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AdobeStock_291217289_copy {
             get {
                 object obj = ResourceManager.GetObject("AdobeStock_291217289-copy", resourceCulture);

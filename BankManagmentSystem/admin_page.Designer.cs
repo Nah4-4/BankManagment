@@ -149,6 +149,7 @@
             // 
             // TBtransferTo
             // 
+            this.TBtransferTo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TBtransferTo.Location = new System.Drawing.Point(357, 29);
             this.TBtransferTo.Name = "TBtransferTo";
             this.TBtransferTo.Size = new System.Drawing.Size(150, 20);
@@ -160,6 +161,7 @@
             // 
             // TBtrasferFrom
             // 
+            this.TBtrasferFrom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TBtrasferFrom.Location = new System.Drawing.Point(167, 29);
             this.TBtrasferFrom.Name = "TBtrasferFrom";
             this.TBtrasferFrom.Size = new System.Drawing.Size(150, 20);
