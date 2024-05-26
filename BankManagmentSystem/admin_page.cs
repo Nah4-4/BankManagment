@@ -98,6 +98,9 @@ namespace BankManagmentSystem
             textBox2.Visible = false;
             TBtransferTo.Visible = true;
             TBtrasferFrom.Visible = true;
+            Btnedit.Visible = false;
+            freeze_btn.Visible = false;
+            Btntransaction.Location=new Point (369, 485);
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
                 string sqlQuery = "SELECT amount,transferred_from,transferred_to,transaction_date FROM TRANSACTION";
@@ -167,6 +170,9 @@ namespace BankManagmentSystem
             TBtransferTo.Visible = false;
             TBtrasferFrom.Visible = false;
             display.ReadOnly = false;
+            Btnedit.Visible = true;
+            freeze_btn.Visible = true;
+            Btntransaction.Location = new Point(212, 485);
             customer_info();
         }
 

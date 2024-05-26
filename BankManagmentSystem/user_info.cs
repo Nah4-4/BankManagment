@@ -181,7 +181,7 @@ namespace BankManagmentSystem
                     }
                     if (freezeValue == 1)
                     {
-                        MessageBox.Show("Account is frozen.", "Freeze Status", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Your Account is frozen.", "Freeze Status", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {

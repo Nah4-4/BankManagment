@@ -92,6 +92,7 @@ namespace BankManagmentSystem
         private void Form1_Activated(object sender, EventArgs e)
         {
             TBname.Text = "BM-";
+            TBpassword.Text = "";
         }
     }
 }
